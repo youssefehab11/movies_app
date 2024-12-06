@@ -26,6 +26,7 @@ class _MainLayoutState extends State<MainLayout> {
   @override
   Widget build(Object context) {
     return Scaffold(
+      extendBody: true,
       body: tabs[currentIndex],
       bottomNavigationBar: SafeArea(
         child: Container(
