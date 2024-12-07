@@ -6,7 +6,7 @@ import 'package:movies_app/core/utils/colors_manager.dart';
 import 'package:movies_app/presentation/layout/tabs/explore/view/explore.dart';
 import 'package:movies_app/presentation/layout/tabs/home/view/home.dart';
 import 'package:movies_app/presentation/layout/tabs/profile/view/profile.dart';
-import 'package:movies_app/presentation/layout/tabs/search/view/home.dart';
+import 'package:movies_app/presentation/layout/tabs/search/view/search.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});
@@ -19,7 +19,7 @@ class _MainLayoutState extends State<MainLayout> {
   int currentIndex = 0;
   List<Widget> tabs = [
     const Home(),
-          Search(),
+    Search(),
     const Explore(),
     const Profile(),
   ];
@@ -52,8 +52,7 @@ class _MainLayoutState extends State<MainLayout> {
                 backgroundColor: ColorsManager.grey,
               ),
               BottomNavigationBarItem(
-                icon:
-                SvgPicture.asset(
+                icon: SvgPicture.asset(
                   AssetsManager.searchIc,
                   colorFilter: getIconColor(1),
                   width: getIconWidth(1),
