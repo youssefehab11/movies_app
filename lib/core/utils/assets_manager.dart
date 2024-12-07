@@ -4,4 +4,7 @@ class AssetsManager {
   static const String searchIc = '$_base/search_ic.svg';
   static const String exploreIc = '$_base/explore_ic.svg';
   static const String profileIc = '$_base/profile_ic.svg';
+  static const String empty = '$_base/Empty.png';
+  static const String empty1 = '$_base/Empty1.png';
+
 }
