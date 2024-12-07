@@ -82,6 +82,10 @@ flutter:
         - asset: assets/fonts/Inter_Regular.ttf
         - asset: assets/fonts/Inter_Medium.ttf
         - asset: assets/fonts/Inter_Bold.ttf
+
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto_Regular.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:
