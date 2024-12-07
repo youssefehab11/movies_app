@@ -19,7 +19,7 @@ class _MainLayoutState extends State<MainLayout> {
   int currentIndex = 0;
   List<Widget> tabs = [
     const Home(),
-    const Search(),
+          Search(),
     const Explore(),
     const Profile(),
   ];
@@ -52,7 +52,8 @@ class _MainLayoutState extends State<MainLayout> {
                 backgroundColor: ColorsManager.grey,
               ),
               BottomNavigationBarItem(
-                icon: SvgPicture.asset(
+                icon:
+                SvgPicture.asset(
                   AssetsManager.searchIc,
                   colorFilter: getIconColor(1),
                   width: getIconWidth(1),
