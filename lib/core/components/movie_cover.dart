@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/core/utils/colors_manager.dart';
-import 'package:movies_app/core/utils/fonts_manager.dart';
+import 'package:movies_app/core/utils/styles_manager.dart';
 
 class MovieCover extends StatelessWidget {
-  const MovieCover({super.key});
+  final double ratePadding;
+  const MovieCover({super.key, this.ratePadding = 15});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +21,8 @@ class MovieCover extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           Positioned(
-            left: 15.w,
-            top: 15.h,
+            left: ratePadding.w,
+            top: ratePadding.h,
             child: Container(
               decoration: BoxDecoration(
                 color: ColorsManager.greyWithOpacity,
@@ -33,11 +34,8 @@ class MovieCover extends StatelessWidget {
                 children: [
                   Text(
                     '7.7',
-                    style: TextStyle(
-                      fontFamily: FontsManager.interFamily,
-                      fontSize: 16.sp,
+                    style: DarkStyles.interW700F16.copyWith(
                       fontWeight: FontWeight.w400,
-                      color: Colors.white,
                     ),
                   ),
                   const SizedBox(width: 4.0),
