@@ -60,7 +60,7 @@ class MovieCover extends StatelessWidget {
             top: ratePadding.h,
             child: Container(
               decoration: BoxDecoration(
-                color: ColorsManager.greyWithOpacity,
+                color: ColorsManager.secondaryGrey.withOpacity(0.71),
                 borderRadius: BorderRadius.circular(10.r),
               ),
               padding: REdgeInsets.all(4.0),

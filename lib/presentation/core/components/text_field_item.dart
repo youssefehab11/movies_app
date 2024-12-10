@@ -21,10 +21,10 @@ class TextFieldItem extends StatelessWidget {
         hintStyle: const TextStyle(
           color: ColorsManager.white,
         ),
-        fillColor: ColorsManager.grey,
+        fillColor: ColorsManager.mainGrey,
         filled: true,
         focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: ColorsManager.grey)),
+            borderSide: BorderSide(color: ColorsManager.mainGrey)),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
         prefixIcon: Padding(
           padding: const EdgeInsets.all(12.0),
