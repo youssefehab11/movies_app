@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/domain/result.dart';
 import 'package:movies_app/domain/entities/genre.dart';
-import 'package:movies_app/domain/use_cases/get_genres_use_case.dart';
-import 'package:movies_app/presentation/ui/layout/tabs/explore/view_model/genres_states.dart';
+import 'package:movies_app/domain/use_cases/genres/get_genres.dart';
+import 'package:movies_app/presentation/ui/layout/tabs/explore/view_models/genres_states.dart';
 
 class GenresViewModel extends Cubit<GenreStates> {
   GenresViewModel({required this.genresUseCase}) : super(GenresLoadingState());

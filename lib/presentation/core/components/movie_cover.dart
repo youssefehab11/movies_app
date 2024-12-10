@@ -17,74 +17,70 @@ class MovieCover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 5 / 7,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          // Image.asset(
-          //   'assets/images/test_img.png',
-          //   // width: 190.w,
-          //   // height: 280.h,
-          //   fit: BoxFit.cover,
-          // ),
-          Container(
-            clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16.r),
-            ),
-            child: movie == null
-                ? Image.asset(
-                    'assets/images/test_img.png',
-                    width: 190.w,
-                    height: 280.h,
-                    fit: BoxFit.cover,
-                  )
-                : CachedNetworkImage(
-                    imageUrl: movie?.posterPath ?? '',
-                    width: 190.w,
-                    height: 280.h,
-                    fit: BoxFit.cover,
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) => Center(
-                      child: CircularProgressIndicator(
-                        value: downloadProgress.progress,
-                      ),
-                    ),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
-                  ),
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        // Image.asset(
+        //   'assets/images/test_img.png',
+        //   // width: 190.w,
+        //   // height: 280.h,
+        //   fit: BoxFit.cover,
+        // ),
+        Container(
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16.r),
           ),
-          Positioned(
-            left: ratePadding.w,
-            top: ratePadding.h,
-            child: Container(
-              decoration: BoxDecoration(
-                color: ColorsManager.secondaryGrey.withOpacity(0.71),
-                borderRadius: BorderRadius.circular(10.r),
-              ),
-              padding: REdgeInsets.all(4.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    movie?.voteAverage?.formatedRate ?? '7.7',
-                    style: DarkStyles.interW700F16.copyWith(
-                      fontWeight: FontWeight.w400,
+          child: movie == null
+              ? Image.asset(
+                  'assets/images/test_img.png',
+                  width: 230.w,
+                  height: 350.h,
+                  fit: BoxFit.cover,
+                )
+              : CachedNetworkImage(
+                  imageUrl: movie?.posterPath ?? '',
+                  width: 230.w,
+                  height: 350.h,
+                  fit: BoxFit.cover,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      Center(
+                    child: CircularProgressIndicator(
+                      value: downloadProgress.progress,
                     ),
                   ),
-                  const SizedBox(width: 4.0),
-                  const Icon(
-                    Icons.star_rounded,
-                    color: ColorsManager.yellow,
-                    size: 20,
-                  ),
-                ],
-              ),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                ),
+        ),
+        Positioned(
+          left: ratePadding.w,
+          top: ratePadding.h,
+          child: Container(
+            decoration: BoxDecoration(
+              color: ColorsManager.secondaryGrey.withOpacity(0.71),
+              borderRadius: BorderRadius.circular(10.r),
             ),
-          )
-        ],
-      ),
+            padding: REdgeInsets.all(4.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  movie?.voteAverage?.formatedRate ?? '7.7',
+                  style: DarkStyles.interW700F16.copyWith(
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                const SizedBox(width: 4.0),
+                const Icon(
+                  Icons.star_rounded,
+                  color: ColorsManager.yellow,
+                  size: 20,
+                ),
+              ],
+            ),
+          ),
+        )
+      ],
     );
   }
 }

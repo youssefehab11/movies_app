@@ -8,9 +8,9 @@ class MoviesRepoImpl extends MoviesRepo {
   MoviesDataSource moviesDataSource;
   MoviesRepoImpl({required this.moviesDataSource});
   @override
-  Future<Result<List<Movie>>> getMovies(
+  Future<Result<List<Movie>>> getExploreMovies(
     String endPoint,
-    Map<String, dynamic> queryParameters,
+    Map<String, dynamic>? queryParameters,
   ) async {
     Result<List<MovieDTO>> result =
         await moviesDataSource.getMovies(endPoint, queryParameters);

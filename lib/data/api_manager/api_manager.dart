@@ -56,7 +56,7 @@ class ApiManager {
 
   Future<Result<List<MovieDTO>>> getMovies({
     required String endPoint,
-    required Map<String, dynamic> queryParameters,
+    required Map<String, dynamic>? queryParameters,
   }) async {
     try {
       Response response =

@@ -9,7 +9,7 @@ class MoviesDataSourceImpl extends MoviesDataSource {
   @override
   Future<Result<List<MovieDTO>>> getMovies(
     String endPoint,
-    Map<String, dynamic> queryParameters,
+    Map<String, dynamic>? queryParameters,
   ) {
     return apiManager.getMovies(
       endPoint: endPoint,

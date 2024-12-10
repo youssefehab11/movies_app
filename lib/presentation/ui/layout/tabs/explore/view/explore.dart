@@ -4,9 +4,9 @@ import 'package:movies_app/data/api_manager/api_manager.dart';
 import 'package:movies_app/data/api_manager/end_points.dart';
 import 'package:movies_app/data/data_source_impl/genres_data_source_impl.dart';
 import 'package:movies_app/data/repositry_impl/genre_repo_impl.dart';
-import 'package:movies_app/domain/use_cases/get_genres_use_case.dart';
-import 'package:movies_app/presentation/ui/layout/tabs/explore/view_model/genres_states.dart';
-import 'package:movies_app/presentation/ui/layout/tabs/explore/view_model/genres_view_model.dart';
+import 'package:movies_app/domain/use_cases/genres/get_genres.dart';
+import 'package:movies_app/presentation/ui/layout/tabs/explore/view_models/genres_states.dart';
+import 'package:movies_app/presentation/ui/layout/tabs/explore/view_models/genres_view_model.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/explore/widgets/genres.dart';
 
 class Explore extends StatefulWidget {
