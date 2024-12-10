@@ -6,13 +6,13 @@ class Success<T> extends Result<T> {
 }
 
 class ServerError<T> extends Result<T> {
-  bool success;
-  int statusCode;
-  String statusMessage;
+  bool? success;
+  int? statusCode;
+  String? statusMessage;
   ServerError({
-    required this.success,
-    required this.statusMessage,
-    required this.statusCode,
+    this.success,
+    this.statusMessage,
+    this.statusCode,
   });
 }
 

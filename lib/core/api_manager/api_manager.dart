@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:movies_app/core/api_manager/result.dart';
 import 'package:movies_app/core/utils/constants.dart';
+import 'package:movies_app/data/model/error_response.dart';
 import 'package:movies_app/data/model/genre_response/genre.dart';
 import 'package:movies_app/data/model/genre_response/genre_response.dart';
 import 'package:movies_app/data/model/movie_response/movie.dart';
@@ -28,17 +29,26 @@ class ApiManager {
       Response response =
           await dio.get(endPoint, queryParameters: queryParameters);
       GenreResponse genreResponse = GenreResponse.fromJson(response.data);
-      if (response.statusCode == 200) {
-        return Success(
-          data: genreResponse.genres ?? [],
-        );
-      } else {
-        return ServerError(
-          success: genreResponse.success ?? false,
-          statusMessage: genreResponse.statusMessage ?? 'Something went wrong',
-          statusCode: genreResponse.statusCode ?? -1,
-        );
-      }
+      return Success(
+        data: genreResponse.genres ?? [],
+      );
+
+      // } else {
+      //   return ServerError(
+      //     success: genreResponse.success ?? false,
+      //     statusMessage: genreResponse.statusMessage ?? 'Something went wrong',
+      //     statusCode: genreResponse.statusCode ?? -1,
+      //   );
+      // }
+    } on DioException catch (error) {
+      ErrorResponse errorResponse =
+          ErrorResponse.fromJson(error.response?.data);
+      print(errorResponse.statusMessage);
+      return ServerError(
+        success: errorResponse.success,
+        statusMessage: errorResponse.statusMessage,
+        statusCode: errorResponse.statusCode,
+      );
     } on Exception catch (exception) {
       return Error(exception: exception);
     }
@@ -56,9 +66,9 @@ class ApiManager {
         return Success(data: result.results ?? []);
       } else {
         return ServerError(
-          success: result.success ?? false,
-          statusMessage: result.statusMessage ?? 'Something went wrong',
-          statusCode: result.statusCode ?? -1,
+          success: result.success,
+          statusMessage: result.statusMessage,
+          statusCode: result.statusCode,
         );
       }
     } on Exception catch (exception) {
