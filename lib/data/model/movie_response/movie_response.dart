@@ -30,8 +30,8 @@ class MovieResponse {
     totalPages = json['total_pages'];
     totalResults = json['total_results'];
     success = json['success'];
-    statusCode = json['statusCode'];
-    statusMessage = json['statusMessage'];
+    statusCode = json['status_code'];
+    statusMessage = json['status_message'];
   }
 
   Map<String, dynamic> toJson() {
