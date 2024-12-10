@@ -71,6 +71,15 @@ class ApiManager {
           statusCode: result.statusCode,
         );
       }
+    } on DioException catch (error) {
+      ErrorResponse errorResponse =
+          ErrorResponse.fromJson(error.response?.data);
+      print(errorResponse.statusMessage);
+      return ServerError(
+        success: errorResponse.success,
+        statusMessage: errorResponse.statusMessage,
+        statusCode: errorResponse.statusCode,
+      );
     } on Exception catch (exception) {
       return Error(exception: exception);
     }

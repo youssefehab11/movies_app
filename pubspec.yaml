@@ -40,6 +40,7 @@ dependencies:
   dio: ^5.7.0
   flutter_bloc: ^8.1.6
   cached_network_image: ^3.4.1
+  carousel_slider: ^5.0.0
 
 dev_dependencies:
   flutter_test:

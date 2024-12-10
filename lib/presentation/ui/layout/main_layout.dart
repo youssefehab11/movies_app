@@ -74,7 +74,7 @@ class _MainLayoutState extends State<MainLayout> {
                     height: getIconWidth(0),
                   ),
                   label: 'Home',
-                  backgroundColor: ColorsManager.grey,
+                  backgroundColor: ColorsManager.mainGrey,
                 ),
                 BottomNavigationBarItem(
                   icon: SvgPicture.asset(
@@ -84,7 +84,7 @@ class _MainLayoutState extends State<MainLayout> {
                     height: getIconWidth(1),
                   ),
                   label: 'Search',
-                  backgroundColor: ColorsManager.grey,
+                  backgroundColor: ColorsManager.mainGrey,
                 ),
                 BottomNavigationBarItem(
                   icon: SvgPicture.asset(
@@ -94,7 +94,7 @@ class _MainLayoutState extends State<MainLayout> {
                     height: getIconWidth(2),
                   ),
                   label: 'Explore',
-                  backgroundColor: ColorsManager.grey,
+                  backgroundColor: ColorsManager.mainGrey,
                 ),
                 BottomNavigationBarItem(
                   icon: SvgPicture.asset(
@@ -104,7 +104,7 @@ class _MainLayoutState extends State<MainLayout> {
                     height: getIconWidth(3),
                   ),
                   label: 'Profile',
-                  backgroundColor: ColorsManager.grey,
+                  backgroundColor: ColorsManager.mainGrey,
                 ),
               ],
             ),
