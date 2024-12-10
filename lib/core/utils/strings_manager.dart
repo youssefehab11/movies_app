@@ -1,5 +1,3 @@
-class StringsManager{
-
-  static const String searchText ="Search";
-
+class StringsManager {
+  static const String searchText = "Search";
 }

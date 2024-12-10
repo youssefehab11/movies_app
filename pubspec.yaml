@@ -37,6 +37,9 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_screenutil: ^5.9.3
   flutter_svg: ^2.0.16
+  dio: ^5.7.0
+  flutter_bloc: ^8.1.6
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:

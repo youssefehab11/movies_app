@@ -1,27 +1,38 @@
-import 'Results.dart';
+import 'movie.dart';
 
 class MovieResponse {
+  int? page;
+  List<Movie>? results;
+  int? totalPages;
+  int? totalResults;
+  bool? success;
+  String? statusMessage;
+  int? statusCode;
+
   MovieResponse({
-      this.page, 
-      this.results, 
-      this.totalPages, 
-      this.totalResults,});
+    this.page,
+    this.results,
+    this.totalPages,
+    this.totalResults,
+    this.success,
+    this.statusCode,
+    this.statusMessage,
+  });
 
   MovieResponse.fromJson(dynamic json) {
     page = json['page'];
     if (json['results'] != null) {
       results = [];
       json['results'].forEach((v) {
-        results?.add(Results.fromJson(v));
+        results?.add(Movie.fromJson(v));
       });
     }
     totalPages = json['total_pages'];
     totalResults = json['total_results'];
+    success = json['success'];
+    statusCode = json['statusCode'];
+    statusMessage = json['statusMessage'];
   }
-  num? page;
-  List<Results>? results;
-  num? totalPages;
-  num? totalResults;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -33,5 +44,4 @@ class MovieResponse {
     map['total_results'] = totalResults;
     return map;
   }
-
 }

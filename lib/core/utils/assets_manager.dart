@@ -8,7 +8,5 @@ class AssetsManager {
   static const String empty = '$_base/Empty.png';
   static const String empty1 = '$_base/Empty1.png';
 
-
   static const String logoutIc = '$_base/logout_ic.svg';
-
 }
