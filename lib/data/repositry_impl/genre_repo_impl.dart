@@ -1,7 +1,7 @@
-import 'package:movies_app/core/api_manager/result.dart';
+import 'package:movies_app/domain/result.dart';
 import 'package:movies_app/data/data_source_contract/genres_data_source.dart';
-import 'package:movies_app/data/model/genre_response/genre.dart';
-import 'package:movies_app/domain/entities/genre_entity.dart';
+import 'package:movies_app/data/models/genre_response/genre_dto.dart';
+import 'package:movies_app/domain/entities/genre.dart';
 import 'package:movies_app/domain/repositry_contract/genres_repo.dart';
 
 class GenreRepoImpl extends GenresRepo {
@@ -9,14 +9,14 @@ class GenreRepoImpl extends GenresRepo {
   GenreRepoImpl({required this.genresDataSource});
 
   @override
-  Future<Result<List<GenreEntity>>> getGenres(
+  Future<Result<List<Genre>>> getGenres(
       String endPoint, Map<String, dynamic>? queryParameters) async {
-    Result<List<Genre>> result =
+    Result<List<GenreDTO>> result =
         await genresDataSource.getGenres(endPoint, queryParameters);
     switch (result) {
       case Success():
         {
-          List<GenreEntity> genresEntity = result.data
+          List<Genre> genresEntity = result.data
               .map(
                 (genre) => genre.toGenreEntity(),
               )

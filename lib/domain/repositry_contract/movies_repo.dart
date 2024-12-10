@@ -1,7 +1,7 @@
-import 'package:movies_app/core/api_manager/result.dart';
-import 'package:movies_app/domain/entities/movie_entity.dart';
+import 'package:movies_app/domain/result.dart';
+import 'package:movies_app/domain/entities/movie.dart';
 
 abstract class MoviesRepo {
-  Future<Result<List<MovieEntity>>> getMovies(
+  Future<Result<List<Movie>>> getMovies(
       String endPoint, Map<String, dynamic> queryParameters);
 }

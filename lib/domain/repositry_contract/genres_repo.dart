@@ -1,7 +1,7 @@
-import 'package:movies_app/core/api_manager/result.dart';
-import 'package:movies_app/domain/entities/genre_entity.dart';
+import 'package:movies_app/domain/result.dart';
+import 'package:movies_app/domain/entities/genre.dart';
 
 abstract class GenresRepo {
-  Future<Result<List<GenreEntity>>> getGenres(
+  Future<Result<List<Genre>>> getGenres(
       String endPoint, Map<String, dynamic>? queryParameters);
 }
