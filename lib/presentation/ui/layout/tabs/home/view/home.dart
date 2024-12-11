@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/presentation/core/components/horizontal_movies_list.dart';
-import 'package:movies_app/presentation/core/components/row_title_component.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/domain/entities/movie.dart';
+import 'package:movies_app/presentation/ui/layout/tabs/home/view_models/popular_movies/popular_movies_view_model.dart';
+import 'package:movies_app/presentation/ui/layout/tabs/home/widgets/new_release_movies.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/home/widgets/popular_movies.dart';
+import 'package:movies_app/presentation/ui/layout/tabs/home/widgets/top_rated_movies.dart';
 
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
   const Home({super.key});
 
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return const SingleChildScrollView(
@@ -18,25 +16,28 @@ class _HomeState extends State<Home> {
       child: Column(
         children: [
           PopularMovies(),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: RowTitleComponent(
-              title: 'New Releases',
+          NewReleaseMovies(),
+          SizedBox(height: 8.0),
+          TopRatedMovies(),
+          SafeArea(
+            bottom: false,
+            child: SizedBox(
+              height: kBottomNavigationBarHeight,
             ),
           ),
-          HorizontalMoviesList(),
-          SizedBox(
-            height: 8.0,
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: RowTitleComponent(
-              title: 'Top Rated',
-            ),
-          ),
-          HorizontalMoviesList(),
         ],
       ),
     );
+  }
+
+  void onMovieChange(
+    BuildContext context,
+    int index,
+    List<Movie> popularMovies,
+  ) {
+    context.read<PopluarMoviesViewModel>().changeCurrentMovie(
+          index,
+          popularMovies,
+        );
   }
 }

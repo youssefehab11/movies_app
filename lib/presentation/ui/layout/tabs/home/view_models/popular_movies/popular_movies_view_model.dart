@@ -1,10 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movies_app/domain/entities/movie.dart';
 import 'package:movies_app/domain/result.dart';
 import 'package:movies_app/domain/use_cases/movies/get_popular_movies.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/home/view_models/popular_movies/popular_movies_states.dart';
 
+@injectable
 class PopluarMoviesViewModel extends Cubit<PopularMoviesStates> {
+  @factoryMethod
   PopluarMoviesViewModel({required this.getPopularMoviesUseCase})
       : super(PopularMoviesLoadingState());
   GetPopularMoviesUseCase getPopularMoviesUseCase;

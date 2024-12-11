@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/presentation/core/utils/colors_manager.dart';
+import 'package:movies_app/presentation/core/utils/constants.dart';
 
 class PopularMoviesBgColor extends StatelessWidget {
   const PopularMoviesBgColor({super.key});
@@ -9,7 +10,7 @@ class PopularMoviesBgColor extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 650.h,
+      height: Constants.homeStackHeight.h,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [

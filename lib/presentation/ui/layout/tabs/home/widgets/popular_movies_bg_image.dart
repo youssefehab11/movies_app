@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_app/presentation/core/utils/constants.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/home/view_models/popular_movies/popular_movies_states.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/home/view_models/popular_movies/popular_movies_view_model.dart';
 
@@ -24,13 +26,13 @@ class PopularMoviesBgImage extends StatelessWidget {
                 child: child,
               );
             },
-            child: Image.network(
+            child: CachedNetworkImage(
               key: ValueKey(state.currentImage),
-              state.currentImage ?? '',
+              imageUrl: state.currentImage ?? '',
               width: double.infinity,
-              height: 645.h,
+              height: Constants.homeStackHeight.h,
               fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) =>
+              errorWidget: (context, error, stackTrace) =>
                   const Icon(Icons.error),
             ),
           );

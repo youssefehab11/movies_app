@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/presentation/core/utils/colors_manager.dart';
+import 'package:movies_app/presentation/core/utils/strings_manager.dart';
 import 'package:movies_app/presentation/core/utils/styles_manager.dart';
 
 class RowTitleComponent extends StatelessWidget {
@@ -23,7 +24,7 @@ class RowTitleComponent extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  'See more',
+                  StringsManager.seeMore,
                   style: DarkStyles.robotW400F16.copyWith(
                     color: ColorsManager.yellow,
                   ),

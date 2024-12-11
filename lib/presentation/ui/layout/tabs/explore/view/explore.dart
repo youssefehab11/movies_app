@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/data/api_manager/api_manager.dart';
 import 'package:movies_app/data/api_manager/end_points.dart';
-import 'package:movies_app/data/data_source_impl/genres_data_source_impl.dart';
-import 'package:movies_app/data/repositry_impl/genre_repo_impl.dart';
-import 'package:movies_app/domain/use_cases/genres/get_genres.dart';
-import 'package:movies_app/presentation/ui/layout/tabs/explore/view_models/genres_states.dart';
-import 'package:movies_app/presentation/ui/layout/tabs/explore/view_models/genres_view_model.dart';
+import 'package:movies_app/di/di.dart';
+import 'package:movies_app/presentation/ui/layout/tabs/explore/view_models/genres/genres_states.dart';
+import 'package:movies_app/presentation/ui/layout/tabs/explore/view_models/genres/genres_view_model.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/explore/widgets/genres.dart';
 
 class Explore extends StatefulWidget {
@@ -21,15 +18,7 @@ class _ExploreState extends State<Explore> {
   @override
   void initState() {
     super.initState();
-    viewModel = GenresViewModel(
-      genresUseCase: GetGenresUseCase(
-        genresRepo: GenreRepoImpl(
-          genresDataSource: GenresDataSourceImpl(
-            apiManager: ApiManager(),
-          ),
-        ),
-      ),
-    );
+    viewModel = getIt.get<GenresViewModel>();
     viewModel.getGenres(EndPoints.genres);
   }
 

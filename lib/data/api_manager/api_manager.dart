@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movies_app/domain/result.dart';
 import 'package:movies_app/presentation/core/utils/constants.dart';
 import 'package:movies_app/data/models/error_response.dart';
@@ -7,6 +8,7 @@ import 'package:movies_app/data/models/genre_response/genre_response.dart';
 import 'package:movies_app/data/models/movie_response/movie_dto.dart';
 import 'package:movies_app/data/models/movie_response/movie_response.dart';
 
+@singleton
 class ApiManager {
   static late Dio dio;
 
@@ -32,22 +34,15 @@ class ApiManager {
       return Success(
         data: genreResponse.genres ?? [],
       );
-
-      // } else {
-      //   return ServerError(
-      //     success: genreResponse.success ?? false,
-      //     statusMessage: genreResponse.statusMessage ?? 'Something went wrong',
-      //     statusCode: genreResponse.statusCode ?? -1,
-      //   );
-      // }
     } on DioException catch (error) {
-      ErrorResponse errorResponse =
-          ErrorResponse.fromJson(error.response?.data);
-      print(errorResponse.statusMessage);
+      ErrorResponse? errorResponse;
+      if (error.response?.data != null) {
+        errorResponse = ErrorResponse.fromJson(error.response?.data);
+      }
       return ServerError(
-        success: errorResponse.success,
-        statusMessage: errorResponse.statusMessage,
-        statusCode: errorResponse.statusCode,
+        success: errorResponse?.success ?? false,
+        statusMessage: errorResponse?.statusMessage ?? error.message,
+        statusCode: errorResponse?.statusCode,
       );
     } on Exception catch (exception) {
       return Error(exception: exception);
@@ -72,13 +67,14 @@ class ApiManager {
         );
       }
     } on DioException catch (error) {
-      ErrorResponse errorResponse =
-          ErrorResponse.fromJson(error.response?.data);
-      print(errorResponse.statusMessage);
+      ErrorResponse? errorResponse;
+      if (error.response?.data != null) {
+        errorResponse = ErrorResponse.fromJson(error.response?.data);
+      }
       return ServerError(
-        success: errorResponse.success,
-        statusMessage: errorResponse.statusMessage,
-        statusCode: errorResponse.statusCode,
+        success: errorResponse?.success ?? false,
+        statusMessage: errorResponse?.statusMessage ?? error.message,
+        statusCode: errorResponse?.statusCode,
       );
     } on Exception catch (exception) {
       return Error(exception: exception);

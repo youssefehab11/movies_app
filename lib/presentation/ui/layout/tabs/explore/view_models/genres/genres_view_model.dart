@@ -1,10 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movies_app/domain/result.dart';
 import 'package:movies_app/domain/entities/genre.dart';
 import 'package:movies_app/domain/use_cases/genres/get_genres.dart';
-import 'package:movies_app/presentation/ui/layout/tabs/explore/view_models/genres_states.dart';
+import 'package:movies_app/presentation/ui/layout/tabs/explore/view_models/genres/genres_states.dart';
 
+@injectable
 class GenresViewModel extends Cubit<GenreStates> {
+  @factoryMethod
   GenresViewModel({required this.genresUseCase}) : super(GenresLoadingState());
   GetGenresUseCase genresUseCase;
   int genreSelectedIndex = 0;
