@@ -41,11 +41,19 @@ dependencies:
   flutter_bloc: ^8.1.6
   cached_network_image: ^3.4.1
   carousel_slider: ^5.0.0
+  # add injectable to your dependencies  
+  injectable:  
+  # add get_it  
+  get_it:
 
 dev_dependencies:
+  # add the generator to your dev_dependencies  
+  injectable_generator:  
+  # add build runner if not already added  
+  build_runner:
+  
   flutter_test:
     sdk: flutter
-
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
