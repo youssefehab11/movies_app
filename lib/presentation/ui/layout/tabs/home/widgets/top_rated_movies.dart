@@ -7,6 +7,7 @@ import 'package:movies_app/presentation/core/components/error_widget.dart';
 import 'package:movies_app/presentation/core/components/horizontal_movies_list.dart';
 import 'package:movies_app/presentation/core/components/loading_widget.dart';
 import 'package:movies_app/presentation/core/components/row_title_component.dart';
+import 'package:movies_app/presentation/core/router/routes.dart';
 import 'package:movies_app/presentation/core/utils/strings_manager.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/home/view_models/top_rated_movies/top_rated_movies_states.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/home/view_models/top_rated_movies/top_rated_view_model.dart';
@@ -24,7 +25,7 @@ class _TopRatedMoviesState extends State<TopRatedMovies> {
   void initState() {
     super.initState();
     viewModel = getIt<TopRatedMoviesViewModel>();
-    viewModel.getTopRatedMovies(EndPoints.topRatedMovies);
+    viewModel.getTopRatedMovies(endPoint: EndPoints.topRatedMovies);
   }
 
   @override
@@ -35,18 +36,22 @@ class _TopRatedMoviesState extends State<TopRatedMovies> {
         height: 360.h,
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: RowTitleComponent(
+                onTap: () => onSeeMorePressed(context),
                 title: StringsManager.topRated,
               ),
             ),
             BlocBuilder<TopRatedMoviesViewModel, TopRatedMoviesStates>(
+              buildWhen: (previous, current) {
+                return viewModel.page == 1;
+              },
               builder: (context, state) {
                 switch (state) {
                   case TopRatedMoviesSucessState():
                     return HorizontalMoviesList(
-                      movies: state.topRatedMovies,
+                      movies: viewModel.firstPageMovies,
                     );
                   case TopRatedMoviesLoadingState():
                     return const Expanded(child: LoadingWidget());
@@ -64,5 +69,10 @@ class _TopRatedMoviesState extends State<TopRatedMovies> {
         ),
       ),
     );
+  }
+
+  void onSeeMorePressed(BuildContext context) {
+    Navigator.pushNamed(context, Routes.allTopRatedMovies,
+        arguments: viewModel);
   }
 }

@@ -7,40 +7,64 @@ import 'package:movies_app/domain/entities/genre.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/explore/view_models/explore_movies/explore_movies_states.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/explore/view_models/explore_movies/explore_movies_view_model.dart';
 
-class MoviesGrid extends StatefulWidget {
+class ExploreMoviesGrid extends StatefulWidget {
   final Genre genre;
-  const MoviesGrid({
+  const ExploreMoviesGrid({
     super.key,
     required this.genre,
   });
 
   @override
-  State<MoviesGrid> createState() => _MoviesGridState();
+  State<ExploreMoviesGrid> createState() => _ExploreMoviesGridState();
 }
 
-class _MoviesGridState extends State<MoviesGrid> {
+class _ExploreMoviesGridState extends State<ExploreMoviesGrid> {
   late ExploreMoviesViewModel viewModel;
+  late ScrollController scrollController;
+
   @override
   void initState() {
     super.initState();
     viewModel = getIt.get<ExploreMoviesViewModel>();
     viewModel.getMovies(
-      EndPoints.exploreMovies,
-      {'with_genres': widget.genre.id},
+      endPoint: EndPoints.exploreMovies,
+      queryParameters: {'with_genres': widget.genre.id},
     );
+    scrollController = ScrollController();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        viewModel.getMovies(
+          endPoint: EndPoints.exploreMovies,
+          queryParameters: {
+            'with_genres': widget.genre.id,
+            'page': ++viewModel.page,
+          },
+        );
+      }
+    });
   }
 
   @override
-  void didUpdateWidget(covariant MoviesGrid oldWidget) {
+  void didUpdateWidget(covariant ExploreMoviesGrid oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.genre.id != widget.genre.id) {
+      viewModel.exploreMovies.clear();
+      viewModel.page = 1;
       viewModel.getMovies(
-        EndPoints.exploreMovies,
-        {
+        endPoint: EndPoints.exploreMovies,
+        queryParameters: {
           'with_genres': widget.genre.id,
         },
       );
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    scrollController.removeListener(() {});
+    scrollController.dispose();
   }
 
   @override
@@ -56,6 +80,7 @@ class _MoviesGridState extends State<MoviesGrid> {
               );
             case ExploreMoviesSuccessState():
               return MoviesDefaultGrid(
+                scrollController: scrollController,
                 crossAxisCount: 2,
                 movies: state.movies,
               );

@@ -6,7 +6,12 @@ import 'package:movies_app/presentation/core/utils/styles_manager.dart';
 
 class RowTitleComponent extends StatelessWidget {
   final String title;
-  const RowTitleComponent({super.key, required this.title});
+  final VoidCallback onTap;
+  const RowTitleComponent({
+    super.key,
+    required this.title,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,17 +20,17 @@ class RowTitleComponent extends StatelessWidget {
       children: [
         Text(
           title,
-          style: DarkStyles.robotW400F16,
+          style: DarkStyles.robotW400F18,
         ),
         InkWell(
-          onTap: () {},
+          onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Row(
               children: [
                 Text(
                   StringsManager.seeMore,
-                  style: DarkStyles.robotW400F16.copyWith(
+                  style: DarkStyles.robotW400F18.copyWith(
                     color: ColorsManager.yellow,
                   ),
                 ),

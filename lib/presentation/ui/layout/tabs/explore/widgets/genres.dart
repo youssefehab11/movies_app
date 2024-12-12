@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/presentation/core/utils/colors_manager.dart';
 import 'package:movies_app/presentation/core/utils/styles_manager.dart';
 import 'package:movies_app/domain/entities/genre.dart';
-import 'package:movies_app/presentation/ui/layout/tabs/explore/widgets/movies_grid.dart';
+import 'package:movies_app/presentation/ui/layout/tabs/explore/widgets/explore_movies_grid.dart';
 
 typedef OnGenrePressed = Function(int index);
 
@@ -60,7 +60,7 @@ class Genres extends StatelessWidget {
         ),
         const SizedBox(height: 8.0),
         Expanded(
-          child: MoviesGrid(
+          child: ExploreMoviesGrid(
             genre: genres[selectedGenre],
           ),
         ),

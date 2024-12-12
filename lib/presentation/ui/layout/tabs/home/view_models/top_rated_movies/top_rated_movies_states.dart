@@ -1,12 +1,8 @@
-import 'package:movies_app/domain/entities/movie.dart';
 import 'package:movies_app/domain/result.dart';
 
 sealed class TopRatedMoviesStates {}
 
-class TopRatedMoviesSucessState extends TopRatedMoviesStates {
-  List<Movie> topRatedMovies;
-  TopRatedMoviesSucessState({required this.topRatedMovies});
-}
+class TopRatedMoviesSucessState extends TopRatedMoviesStates {}
 
 class TopRatedMoviesLoadingState extends TopRatedMoviesStates {}
 

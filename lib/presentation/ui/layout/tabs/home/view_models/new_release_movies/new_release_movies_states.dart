@@ -1,12 +1,8 @@
-import 'package:movies_app/domain/entities/movie.dart';
 import 'package:movies_app/domain/result.dart';
 
 sealed class NewReleaseMoviesStates {}
 
-class NewReleaseMoviesSucessState extends NewReleaseMoviesStates {
-  List<Movie> newReleaseMovies;
-  NewReleaseMoviesSucessState({required this.newReleaseMovies});
-}
+class NewReleaseMoviesSucessState extends NewReleaseMoviesStates {}
 
 class NewReleaseMoviesLoadingState extends NewReleaseMoviesStates {}
 

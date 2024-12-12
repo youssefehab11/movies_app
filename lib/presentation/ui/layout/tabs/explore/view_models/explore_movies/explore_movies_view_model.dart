@@ -11,15 +11,22 @@ class ExploreMoviesViewModel extends Cubit<ExploreMoviesStates> {
   ExploreMoviesViewModel({required this.getMoviesUseCase})
       : super(ExploreMoviesLoadingState());
   GetExploreMoviesUseCase getMoviesUseCase;
+  List<Movie> exploreMovies = [];
+  int page = 1;
 
-  void getMovies(String endPoint,
-      [Map<String, dynamic>? queryParameters]) async {
-    emit(ExploreMoviesLoadingState());
+  void getMovies({
+    required String endPoint,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    if (page == 1) {
+      emit(ExploreMoviesLoadingState());
+    }
     Result<List<Movie>> result =
         await getMoviesUseCase.execute(endPoint, queryParameters);
     switch (result) {
       case Success<List<Movie>>():
-        emit(ExploreMoviesSuccessState(movies: result.data));
+        exploreMovies.addAll(result.data);
+        emit(ExploreMoviesSuccessState(movies: exploreMovies));
       case ServerError<List<Movie>>():
         emit(ExploreMoviesErrorState(serverError: result));
       case Error<List<Movie>>():

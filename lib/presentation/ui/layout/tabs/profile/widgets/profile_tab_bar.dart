@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/presentation/core/components/column_component.dart';
-import 'package:movies_app/presentation/core/components/movies_grid.dart';
 import 'package:movies_app/presentation/core/utils/colors_manager.dart';
 import 'package:movies_app/presentation/core/utils/styles_manager.dart';
 
@@ -25,7 +24,7 @@ class ProfileTabBar extends StatelessWidget {
                   ),
                   spaceHight: 4,
                   tailLabel: 'Wish List',
-                  tailStyle: DarkStyles.robotW400F16,
+                  tailStyle: DarkStyles.robotW400F18,
                 ),
                 ColumnComponent(
                   head: const Icon(
@@ -35,24 +34,24 @@ class ProfileTabBar extends StatelessWidget {
                   ),
                   spaceHight: 4,
                   tailLabel: 'History',
-                  tailStyle: DarkStyles.robotW400F16,
+                  tailStyle: DarkStyles.robotW400F18,
                 ),
               ],
             ),
-            const Expanded(
-              child: TabBarView(
-                children: [
-                  MoviesDefaultGrid(
-                    crossAxisCount: 3,
-                    ratePadding: 10,
-                  ),
-                  MoviesDefaultGrid(
-                    crossAxisCount: 3,
-                    ratePadding: 10,
-                  ),
-                ],
-              ),
-            )
+            // const Expanded(
+            //   child: TabBarView(
+            //     children: [
+            //       MoviesDefaultGrid(
+            //         crossAxisCount: 3,
+            //         ratePadding: 10,
+            //       ),
+            //       MoviesDefaultGrid(
+            //         crossAxisCount: 3,
+            //         ratePadding: 10,
+            //       ),
+            //     ],
+            //   ),
+            // )
           ],
         ),
       ),
