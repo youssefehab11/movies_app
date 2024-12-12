@@ -31,7 +31,7 @@ class UserActions extends StatelessWidget {
             child: AppButton(
                 onBtnPressed: () {},
                 btnLabel: 'Exit',
-                labelStyle: DarkStyles.robotW400F16.copyWith(
+                labelStyle: DarkStyles.robotW400F18.copyWith(
                   color: ColorsManager.white,
                 ),
                 color: ColorsManager.red,

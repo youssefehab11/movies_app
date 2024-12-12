@@ -7,6 +7,7 @@ import 'package:movies_app/presentation/core/components/error_widget.dart';
 import 'package:movies_app/presentation/core/components/horizontal_movies_list.dart';
 import 'package:movies_app/presentation/core/components/loading_widget.dart';
 import 'package:movies_app/presentation/core/components/row_title_component.dart';
+import 'package:movies_app/presentation/core/router/routes.dart';
 import 'package:movies_app/presentation/core/utils/strings_manager.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/home/view_models/new_release_movies/new_release_movies_states.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/home/view_models/new_release_movies/new_release_movies_view_model.dart';
@@ -20,11 +21,12 @@ class NewReleaseMovies extends StatefulWidget {
 
 class _NewReleaseMoviesState extends State<NewReleaseMovies> {
   late NewReleaseMoviesViewModel viewModel;
+
   @override
   void initState() {
     super.initState();
     viewModel = getIt.get<NewReleaseMoviesViewModel>();
-    viewModel.getNewReleaseMovies(EndPoints.newReleaseMovies);
+    viewModel.getNewReleaseMovies(endPoint: EndPoints.newReleaseMovies);
   }
 
   @override
@@ -35,19 +37,25 @@ class _NewReleaseMoviesState extends State<NewReleaseMovies> {
         height: 360.h,
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: RowTitleComponent(
+                onTap: () {
+                  onSeeMorePressed();
+                },
                 title: StringsManager.newReleases,
               ),
             ),
             BlocBuilder<NewReleaseMoviesViewModel, NewReleaseMoviesStates>(
+              buildWhen: (previous, current) {
+                return viewModel.page == 1;
+              },
               builder: (context, state) {
                 switch (state) {
                   case NewReleaseMoviesSucessState():
                     {
                       return HorizontalMoviesList(
-                        movies: state.newReleaseMovies,
+                        movies: viewModel.firstPageMovies,
                       );
                     }
                   case NewReleaseMoviesLoadingState():
@@ -69,6 +77,14 @@ class _NewReleaseMoviesState extends State<NewReleaseMovies> {
           ],
         ),
       ),
+    );
+  }
+
+  void onSeeMorePressed() {
+    Navigator.pushNamed(
+      context,
+      Routes.allNewReleaseMovies,
+      arguments: viewModel,
     );
   }
 }

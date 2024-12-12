@@ -11,21 +11,35 @@ class TopRatedMoviesViewModel extends Cubit<TopRatedMoviesStates> {
   TopRatedMoviesViewModel({required this.getTopRatedMoviesUseCase})
       : super(TopRatedMoviesLoadingState());
   GetTopRatedMoviesUseCase getTopRatedMoviesUseCase;
+  int page = 1;
+  List<Movie> firstPageMovies = [];
+  List<Movie> allMovies = [];
 
-  void getTopRatedMovies(
-    String endPoint, [
+  void getTopRatedMovies({
+    required String endPoint,
     Map<String, dynamic>? queryParameters,
-  ]) async {
-    emit(TopRatedMoviesLoadingState());
+  }) async {
+    if (page == 1) {
+      emit(TopRatedMoviesLoadingState());
+    }
     Result<List<Movie>> result =
         await getTopRatedMoviesUseCase.execute(endPoint, queryParameters);
     switch (result) {
       case Success<List<Movie>>():
-        emit(TopRatedMoviesSucessState(topRatedMovies: result.data));
+        _addMoviesToList(result.data);
+        emit(TopRatedMoviesSucessState());
       case ServerError<List<Movie>>():
         emit(TopRatedMoviesErroState(serverError: result));
       case Error<List<Movie>>():
         emit(TopRatedMoviesErroState(error: result));
+    }
+  }
+
+  void _addMoviesToList(List<Movie> movies) {
+    if (page == 1) {
+      firstPageMovies.addAll(movies);
+    } else {
+      allMovies.addAll(movies);
     }
   }
 }

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/presentation/core/components/movies_grid.dart';
+import 'package:movies_app/presentation/core/components/text_field_item.dart';
+import 'package:movies_app/presentation/core/utils/assets_manager.dart';
 import 'package:movies_app/presentation/core/utils/strings_manager.dart';
-
-import '../../../../../core/components/text_field_item.dart';
-import '../../../../../core/utils/assets_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Search extends StatefulWidget {
@@ -41,11 +39,11 @@ class _SearchState extends State<Search> {
                   child: Column(
                     // mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      Expanded(
-                        child: MoviesDefaultGrid(
-                          crossAxisCount: 2,
-                        ),
-                      ),
+                      // Expanded(
+                      //   child: MoviesDefaultGrid(
+                      //     crossAxisCount: 2,
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

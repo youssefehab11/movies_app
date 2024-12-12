@@ -28,7 +28,7 @@ class DarkStyles {
     fontWeight: FontWeight.bold,
     color: ColorsManager.white,
   );
-  static TextStyle robotW400F16 = TextStyle(
+  static TextStyle robotW400F18 = TextStyle(
     fontFamily: FontsManager.robotoFamily,
     fontSize: 18.sp,
     fontWeight: FontWeight.w400,

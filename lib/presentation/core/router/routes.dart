@@ -1,3 +1,5 @@
 class Routes {
-  static const String homeRoute = '/';
+  static const String home = '/';
+  static const String allNewReleaseMovies = '/allNewReleaseMovies';
+  static const String allTopRatedMovies = '/allTopRatedMovies';
 }

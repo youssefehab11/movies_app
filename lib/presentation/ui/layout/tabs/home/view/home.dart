@@ -6,9 +6,14 @@ import 'package:movies_app/presentation/ui/layout/tabs/home/widgets/new_release_
 import 'package:movies_app/presentation/ui/layout/tabs/home/widgets/popular_movies.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/home/widgets/top_rated_movies.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return const SingleChildScrollView(

@@ -6,17 +6,20 @@ import 'package:movies_app/domain/entities/movie.dart';
 class MoviesDefaultGrid extends StatelessWidget {
   final double ratePadding;
   final int crossAxisCount;
-  final List<Movie>? movies;
+  final ScrollController scrollController;
+  final List<Movie> movies;
   const MoviesDefaultGrid({
     super.key,
     required this.crossAxisCount,
+    required this.scrollController,
     this.ratePadding = 15,
-    this.movies,
+    required this.movies,
   });
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      controller: scrollController,
       padding: EdgeInsets.zero,
       physics: const BouncingScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -25,10 +28,10 @@ class MoviesDefaultGrid extends StatelessWidget {
         crossAxisSpacing: 16.w,
         childAspectRatio: 5 / 7,
       ),
-      itemCount: movies?.length ?? 20,
+      itemCount: movies.length,
       itemBuilder: (context, index) => MovieCover(
         ratePadding: ratePadding,
-        movie: movies?[index],
+        movie: movies[index],
       ),
     );
   }
