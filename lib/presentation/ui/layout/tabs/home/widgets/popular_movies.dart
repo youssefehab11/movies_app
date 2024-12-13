@@ -30,7 +30,7 @@ class _PopularMoviesState extends State<PopularMovies> {
     return BlocProvider(
       create: (context) => viewModel,
       child: SizedBox(
-        height: Constants.homeStackHeight.h,
+        height: Constants.bgImageHight.h,
         child: const Stack(
           alignment: Alignment.topCenter,
           children: [

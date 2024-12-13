@@ -30,7 +30,7 @@ class PopularMoviesBgImage extends StatelessWidget {
               key: ValueKey(state.currentImage),
               imageUrl: state.currentImage ?? '',
               width: double.infinity,
-              height: Constants.homeStackHeight.h,
+              height: Constants.bgImageHight.h,
               fit: BoxFit.cover,
               errorWidget: (context, error, stackTrace) =>
                   const Icon(Icons.error),
