@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/data/api_manager/end_points.dart';
+import 'package:movies_app/domain/end_points.dart';
 import 'package:movies_app/presentation/core/components/default_app_bar.dart';
 import 'package:movies_app/presentation/core/components/error_widget.dart';
 import 'package:movies_app/presentation/core/components/loading_widget.dart';

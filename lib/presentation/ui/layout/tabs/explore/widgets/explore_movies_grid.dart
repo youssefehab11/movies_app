@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/data/api_manager/end_points.dart';
+import 'package:movies_app/domain/end_points.dart';
 import 'package:movies_app/di/di.dart';
 import 'package:movies_app/presentation/core/components/movies_grid.dart';
 import 'package:movies_app/domain/entities/genre.dart';

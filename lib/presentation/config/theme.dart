@@ -11,5 +11,8 @@ class AppTheme {
       elevation: 0,
     ),
     scaffoldBackgroundColor: ColorsManager.mainDark,
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: ColorsManager.yellow,
+    ),
   );
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/domain/entities/movie.dart';
 import 'package:movies_app/presentation/core/animation/navigation.dart';
 import 'package:movies_app/presentation/core/router/routes.dart';
 import 'package:movies_app/presentation/ui/layout/main_layout.dart';
@@ -26,8 +25,9 @@ class RouteManager {
         return RouteBuilder.slideRight(
             newRoute: AllTopRatedMovies(viewModel: viewModel));
       case Routes.movieDetails:
-        Movie movie = settings.arguments as Movie;
-        return RouteBuilder.slideRight(newRoute: MovieDetails(movie: movie));
+        int movieId = settings.arguments as int;
+        return RouteBuilder.slideRight(
+            newRoute: MovieDetails(movieId: movieId));
       default:
         return MaterialPageRoute(builder: (_) => const UnDefinedWidget());
     }

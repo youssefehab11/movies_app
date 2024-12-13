@@ -25,10 +25,8 @@ class _HomeState extends State<Home> {
           SizedBox(height: 8.0),
           TopRatedMovies(),
           SafeArea(
-            bottom: false,
-            child: SizedBox(
-              height: kBottomNavigationBarHeight,
-            ),
+            top: false,
+            child: SizedBox.shrink(),
           ),
         ],
       ),

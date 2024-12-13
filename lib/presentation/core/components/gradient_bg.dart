@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_app/presentation/core/utils/colors_manager.dart';
 import 'package:movies_app/presentation/core/utils/constants.dart';
 
-class PopularMoviesBgColor extends StatelessWidget {
-  const PopularMoviesBgColor({super.key});
+class GradientBg extends StatelessWidget {
+  final List<Color> colors;
+  const GradientBg({
+    super.key,
+    required this.colors,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +18,7 @@ class PopularMoviesBgColor extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [
-            ColorsManager.secondaryGrey.withOpacity(0.8),
-            ColorsManager.secondaryGrey.withOpacity(0.6),
-            ColorsManager.secondaryGrey.withOpacity(1),
-          ],
+          colors: colors,
         ),
       ),
     );

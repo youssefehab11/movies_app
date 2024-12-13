@@ -1,44 +1,35 @@
-import 'movie_dto.dart';
+import 'package:movies_app/data/models/shared/movie_dto.dart';
 
 class MovieResponse {
   int? page;
-  List<MovieDTO>? results;
+  List<MovieDTO>? movies;
   int? totalPages;
   int? totalResults;
-  bool? success;
-  String? statusMessage;
-  int? statusCode;
 
   MovieResponse({
     this.page,
-    this.results,
+    this.movies,
     this.totalPages,
     this.totalResults,
-    this.success,
-    this.statusCode,
-    this.statusMessage,
   });
 
   MovieResponse.fromJson(dynamic json) {
     page = json['page'];
     if (json['results'] != null) {
-      results = [];
+      movies = [];
       json['results'].forEach((v) {
-        results?.add(MovieDTO.fromJson(v));
+        movies?.add(MovieDTO.fromJson(v));
       });
     }
     totalPages = json['total_pages'];
     totalResults = json['total_results'];
-    success = json['success'];
-    statusCode = json['status_code'];
-    statusMessage = json['status_message'];
   }
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['page'] = page;
-    if (results != null) {
-      map['results'] = results?.map((v) => v.toJson()).toList();
+    if (movies != null) {
+      map['results'] = movies?.map((v) => v.toJson()).toList();
     }
     map['total_pages'] = totalPages;
     map['total_results'] = totalResults;

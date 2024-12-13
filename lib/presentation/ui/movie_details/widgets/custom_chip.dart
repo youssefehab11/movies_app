@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies_app/presentation/core/utils/colors_manager.dart';
-import 'package:movies_app/presentation/core/utils/styles_manager.dart';
 
 class CustomChip extends StatelessWidget {
   final String title;
@@ -28,7 +27,7 @@ class CustomChip extends StatelessWidget {
       ),
       label: Text(
         title,
-        style: DarkStyles.interW700F20,
+        style: labelStyle,
       ),
       backgroundColor: ColorsManager.mainGrey,
     );

@@ -34,4 +34,10 @@ class DarkStyles {
     fontWeight: FontWeight.w400,
     color: ColorsManager.white,
   );
+  static TextStyle robotW400F16 = TextStyle(
+    fontFamily: FontsManager.robotoFamily,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w400,
+    color: ColorsManager.white,
+  );
 }

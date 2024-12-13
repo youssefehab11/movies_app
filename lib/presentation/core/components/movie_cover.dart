@@ -21,8 +21,8 @@ class MovieCover extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(coverBorderRadius.r),
-      onTap: () =>
-          Navigator.pushNamed(context, Routes.movieDetails, arguments: movie),
+      onTap: () => Navigator.pushNamed(context, Routes.movieDetails,
+          arguments: movie?.id),
       child: Stack(
         alignment: Alignment.center,
         children: [

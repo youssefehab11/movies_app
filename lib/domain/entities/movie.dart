@@ -1,6 +1,8 @@
+import 'package:movies_app/domain/entities/genre.dart';
+
 class Movie {
   String? backdropPath;
-  List<int>? genreIds;
+  List<Genre>? genres;
   int? id;
   String? overview;
   String? posterPath;
@@ -8,10 +10,11 @@ class Movie {
   String? title;
   num? voteAverage;
   int? voteCount;
+  num? runtime;
 
   Movie({
     this.backdropPath,
-    this.genreIds,
+    this.genres,
     this.id,
     this.overview,
     this.posterPath,
@@ -19,5 +22,6 @@ class Movie {
     this.title,
     this.voteAverage,
     this.voteCount,
+    this.runtime,
   });
 }
