@@ -10,9 +10,11 @@ class PopularMoviesBgColor extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: Constants.homeStackHeight.h,
+      height: Constants.bgImageHight.h,
       decoration: BoxDecoration(
         gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
           colors: [
             ColorsManager.secondaryGrey.withOpacity(0.8),
             ColorsManager.secondaryGrey.withOpacity(0.6),
