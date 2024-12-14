@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/presentation/core/components/text_field_item.dart';
 import 'package:movies_app/presentation/core/utils/assets_manager.dart';
-import 'package:movies_app/presentation/core/utils/strings_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Search extends StatefulWidget {
@@ -22,10 +20,10 @@ class _SearchState extends State<Search> {
       bottom: false,
       child: Column(
         children: [
-          TextFieldItem(
-            hintText: StringsManager.searchText,
-            searchController: searchController,
-          ),
+          // AppTextField(
+          //   hintText: StringsManager.searchText,
+          //   searchController: searchController,
+          // ),
           isEmpty
               ? Column(
                   children: [
