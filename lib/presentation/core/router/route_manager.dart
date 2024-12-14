@@ -6,12 +6,18 @@ import 'package:movies_app/presentation/ui/layout/tabs/home/view/all_new_release
 import 'package:movies_app/presentation/ui/layout/tabs/home/view/all_top_rated_movies.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/home/view_models/new_release_movies/new_release_movies_view_model.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/home/view_models/top_rated_movies/top_rated_view_model.dart';
+import 'package:movies_app/presentation/ui/login/view/login.dart';
 import 'package:movies_app/presentation/ui/movie_details/view/movie_details.dart';
+import 'package:movies_app/presentation/ui/register/view/register.dart';
 
 class RouteManager {
   static Route<MaterialPageRoute<Widget>> onGenerateRoute(
       RouteSettings settings) {
     switch (settings.name) {
+      case Routes.login:
+        return MaterialPageRoute(builder: (_) => const Login());
+      case Routes.register:
+        return RouteBuilder.slideRight(newRoute: const Register());
       case Routes.home:
         return MaterialPageRoute(builder: (_) => const MainLayout());
       case Routes.allNewReleaseMovies:

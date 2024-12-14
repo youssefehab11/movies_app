@@ -10,6 +10,11 @@ class AssetsManager {
   static const String starIc = '$_base/star_ic.svg';
   static const String clockIc = '$_base/clock_ic.svg';
 
+  static const String nameIc = '$_base/name_ic.svg';
+  static const String emailIc = '$_base/email_ic.svg';
+  static const String passwordIc = '$_base/password_ic.svg';
+  static const String phoneIc = '$_base/phone_ic.svg';
+
   static const String empty = '$_base/Empty.png';
   static const String empty1 = '$_base/Empty1.png';
 
@@ -17,4 +22,6 @@ class AssetsManager {
 
   static const String watchNow = '$_base/watch_now.png';
   static const String availableNow = '$_base/available_now.png';
+
+  static const String logo = '$_base/logo.png';
 }
