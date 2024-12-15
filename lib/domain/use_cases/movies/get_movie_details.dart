@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:movies_app/domain/entities/movie.dart';
-import 'package:movies_app/domain/repositry_contract/movie_details_repo.dart';
+import 'package:movies_app/domain/repositry_contract/api_repo/movie_details_repo.dart';
 import 'package:movies_app/domain/result.dart';
 
 @injectable

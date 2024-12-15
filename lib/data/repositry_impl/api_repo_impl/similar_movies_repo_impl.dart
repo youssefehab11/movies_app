@@ -1,8 +1,8 @@
 import 'package:injectable/injectable.dart';
-import 'package:movies_app/data/data_source_contract/similar_movies_data_source.dart';
+import 'package:movies_app/data/data_source_contract/api_data_source/similar_movies_data_source.dart';
 import 'package:movies_app/data/models/shared/movie_dto.dart';
 import 'package:movies_app/domain/entities/movie.dart';
-import 'package:movies_app/domain/repositry_contract/similar_movies_repo.dart';
+import 'package:movies_app/domain/repositry_contract/api_repo/similar_movies_repo.dart';
 import 'package:movies_app/domain/result.dart';
 
 @Injectable(as: SimilarMoviesRepo)
