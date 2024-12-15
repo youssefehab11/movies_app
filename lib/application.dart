@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/presentation/config/theme.dart';
-import 'package:movies_app/data/api_manager/api_manager.dart';
+import 'package:movies_app/data/services/api/api_manager.dart';
 import 'package:movies_app/presentation/core/router/route_manager.dart';
 
 class MoviesApp extends StatelessWidget {
