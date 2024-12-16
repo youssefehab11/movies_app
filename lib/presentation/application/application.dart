@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_app/presentation/application/app_view_model.dart';
 import 'package:movies_app/presentation/config/theme.dart';
 import 'package:movies_app/data/services/api/api_manager.dart';
 import 'package:movies_app/presentation/core/router/route_manager.dart';
@@ -19,6 +21,7 @@ class MoviesApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: (settings) => RouteManager.onGenerateRoute(settings),
+        initialRoute: context.read<AppViewModel>().checkAutoLogin(),
         theme: AppTheme.lightTheme,
       ),
     );

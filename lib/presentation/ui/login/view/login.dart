@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_app/presentation/core/components/app_button.dart';
-import 'package:movies_app/presentation/core/components/app_text_field.dart';
+import 'package:movies_app/di/di.dart';
+import 'package:movies_app/presentation/application/app_view_model.dart';
+import 'package:movies_app/presentation/core/components/app_logo.dart';
 import 'package:movies_app/presentation/core/router/routes.dart';
-import 'package:movies_app/presentation/core/utils/assets_manager.dart';
-import 'package:movies_app/presentation/core/utils/colors_manager.dart';
+import 'package:movies_app/presentation/core/utils/app_dialogs.dart';
+import 'package:movies_app/presentation/core/utils/helper_functions.dart';
 import 'package:movies_app/presentation/core/utils/strings_manager.dart';
-import 'package:movies_app/presentation/core/utils/validator.dart';
+import 'package:movies_app/presentation/ui/login/login_view_model/login_state.dart';
+import 'package:movies_app/presentation/ui/login/login_view_model/login_view_model.dart';
+import 'package:movies_app/presentation/ui/login/widgets/login_fields.dart';
+import 'package:movies_app/presentation/ui/login/widgets/login_user_actions.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -16,6 +21,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  late LoginViewModel viewModel;
   late TextEditingController emailController;
   late TextEditingController passwordController;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -25,6 +31,7 @@ class _LoginState extends State<Login> {
     super.initState();
     emailController = TextEditingController();
     passwordController = TextEditingController();
+    viewModel = getIt<LoginViewModel>();
   }
 
   @override
@@ -37,97 +44,59 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Scaffold(
-        body: Form(
-          key: formKey,
-          child: Center(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    Image.asset(
-                      AssetsManager.logo,
-                      height: 118.h,
-                    ),
-                    SizedBox(height: 50.h),
-                    AppTextField(
-                      validator: (input) {
-                        EmailValidator emailValidator = EmailValidator(
-                          fieldName: StringsManager.email,
-                          fieldErrorMessage: StringsManager.emailErrorMessage,
-                        );
-                        return emailValidator.validate(input);
-                      },
-                      controller: emailController,
-                      hintText: StringsManager.email,
-                      keyboardType: TextInputType.emailAddress,
-                      textInputAction: TextInputAction.next,
-                      prefixSvg: AssetsManager.emailIc,
-                    ),
-                    SizedBox(height: 16.h),
-                    AppTextField(
-                      validator: (input) {
-                        PasswordValidator passwordValidator = PasswordValidator(
-                          fieldName: StringsManager.password,
-                          fieldErrorMessage:
-                              StringsManager.passwordErrorMessage,
-                        );
-                        return passwordValidator.validate(input);
-                      },
-                      controller: passwordController,
-                      hintText: StringsManager.password,
-                      keyboardType: TextInputType.visiblePassword,
-                      textInputAction: TextInputAction.done,
-                      prefixSvg: AssetsManager.passwordIc,
-                      suffixIcon: isVisiblePassword
-                          ? Icons.visibility
-                          : Icons.visibility_off,
-                      onSuffixIconPressed: () {
-                        setState(() {
-                          isVisiblePassword = !isVisiblePassword;
-                        });
-                      },
-                      isObsecure: !isVisiblePassword,
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional.centerEnd,
-                      child: MaterialButton(
-                        onPressed: () {},
-                        splashColor: ColorsManager.yellow.withOpacity(0.2),
-                        child: const Text(
-                          StringsManager.forgetPassword,
-                          style: TextStyle(color: ColorsManager.yellow),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: AppButton(
-                        btnLabel: StringsManager.login,
-                        onBtnPressed: () => onLoginPressed(),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+      onTap: () => clearFocus(),
+      child: BlocProvider(
+        create: (context) => viewModel,
+        child: BlocListener<LoginViewModel, LoginState>(
+          listener: (context, state) {
+            if (state is LoginErrorState) {
+              return AppDialogs.showMeesageDialog(
+                context: context,
+                title: StringsManager.error,
+                posActionTitle: StringsManager.ok,
+                posAction: () {
+                  Navigator.of(context).pop();
+                },
+                message:
+                    extractFirebaseErrorMessage(state.serverError, state.error),
+              );
+            }
+            if (state is LoginSuccessState) {
+              context.read<AppViewModel>().appUser = state.user;
+              return AppDialogs.showMeesageDialog(
+                context: context,
+                posActionTitle: StringsManager.ok,
+                title: StringsManager.success,
+                posAction: () {
+                  Navigator.of(context).pop();
+                  Navigator.pushReplacementNamed(context, Routes.home);
+                },
+                message: StringsManager.successfullyLoggedIn,
+              );
+            }
+          },
+          child: Scaffold(
+            body: Form(
+              key: formKey,
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
                       children: [
-                        const Text(
-                          StringsManager.dontHaveAccount,
-                          style: TextStyle(color: ColorsManager.white),
+                        const AppLogo(),
+                        SizedBox(height: 50.h),
+                        LoginFields(
+                          emailController: emailController,
+                          passwordController: passwordController,
                         ),
-                        MaterialButton(
-                          padding: const EdgeInsets.symmetric(horizontal: 4),
-                          onPressed: () => onCreateAccountPressed(),
-                          splashColor: ColorsManager.yellow.withOpacity(0.2),
-                          child: const Text(
-                            StringsManager.createAccount,
-                            style: TextStyle(color: ColorsManager.yellow),
-                          ),
-                        ),
+                        LoginUserActions(
+                          onLoginPressed: onLoginPressed,
+                          onCreateAccountPressed: onCreateAccountPressed,
+                        )
                       ],
-                    )
-                  ],
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -138,8 +107,9 @@ class _LoginState extends State<Login> {
   }
 
   void onLoginPressed() {
+    clearFocus();
     if (formKey.currentState?.validate() ?? false) {
-      print('valid');
+      viewModel.login(emailController.text, passwordController.text);
     }
   }
 

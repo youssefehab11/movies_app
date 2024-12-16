@@ -17,7 +17,6 @@ class MainLayout extends StatefulWidget {
 
 class _MainLayoutState extends State<MainLayout> {
   int currentIndex = 0;
-  //late MoviesViewModel viewModel;
 
   List<Widget> tabs = [
     const Home(),

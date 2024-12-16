@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:movies_app/domain/entities/user.dart';
 import 'package:movies_app/domain/result.dart';
 
 sealed class RegisterStates {}
@@ -6,8 +6,8 @@ sealed class RegisterStates {}
 class RegisterInitialStat extends RegisterStates {}
 
 class RegisterSuccessState extends RegisterStates {
-  UserCredential userCredential;
-  RegisterSuccessState({required this.userCredential});
+  UserEntity user;
+  RegisterSuccessState({required this.user});
 }
 
 class RegisterLoadingState extends RegisterStates {}
@@ -18,3 +18,7 @@ class RegisterErrorState extends RegisterStates {
 
   RegisterErrorState({this.error, this.serverError});
 }
+
+class TogglePasswordVisibiltyState extends RegisterStates {}
+
+class ToggleConfirmPasswordVisibiltyState extends RegisterStates {}
