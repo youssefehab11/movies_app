@@ -14,5 +14,9 @@ class AppTheme {
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       color: ColorsManager.yellow,
     ),
+    dialogTheme: const DialogTheme(
+      backgroundColor: ColorsManager.mainDark,
+      elevation: 0,
+    ),
   );
 }

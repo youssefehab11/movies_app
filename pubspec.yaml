@@ -47,6 +47,7 @@ dependencies:
   get_it:
   firebase_core: ^3.8.1
   firebase_auth: ^5.3.4
+  cloud_firestore: ^5.5.1
 
 dev_dependencies:
   # add the generator to your dev_dependencies  

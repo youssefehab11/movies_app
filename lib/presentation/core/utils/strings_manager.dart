@@ -21,5 +21,15 @@ class StringsManager {
   static const String phone = "Phone Number";
   static const String name = "Name";
   static const String confirmPassword = "Confirm Password";
-  static const String avatar = "Avatar";
+  static const String ok = "Ok";
+  static const String accountCreated = "Account Created Successfully";
+  static const String success = "Success";
+  static const String error = "Error";
+  static const String somethingWentWrong = 'Something went wrong';
+  static const String exit = 'Exit';
+  static const String editProfile = 'Edit Profile';
+  static const String successfullyLoggedIn = 'Successfully Logged In';
+  static const String confirm = 'Confirm';
+  static const String cancel = 'Cancel';
+  static const String areYouSureToLogout = 'Are you sure to logout?';
 }

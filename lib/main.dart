@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/application.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/presentation/application/app_view_model.dart';
+import 'package:movies_app/presentation/application/application.dart';
 import 'package:movies_app/di/di.dart';
 import 'package:movies_app/firebase_options.dart';
 
@@ -10,5 +12,10 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   configureDependencies();
-  runApp(const MoviesApp());
+  runApp(
+    BlocProvider(
+      create: (context) => getIt<AppViewModel>(),
+      child: const MoviesApp(),
+    ),
+  );
 }

@@ -12,8 +12,8 @@ abstract class Validator {
   }
 }
 
-class NameValidaror extends Validator {
-  NameValidaror({
+class NameValidator extends Validator {
+  NameValidator({
     required super.fieldName,
   });
 }

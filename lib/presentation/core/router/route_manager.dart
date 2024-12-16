@@ -11,7 +11,7 @@ import 'package:movies_app/presentation/ui/movie_details/view/movie_details.dart
 import 'package:movies_app/presentation/ui/register/view/register.dart';
 
 class RouteManager {
-  static Route<MaterialPageRoute<Widget>> onGenerateRoute(
+  static Route<MaterialPageRoute<Widget>>? onGenerateRoute(
       RouteSettings settings) {
     switch (settings.name) {
       case Routes.login:
@@ -35,20 +35,20 @@ class RouteManager {
         return RouteBuilder.slideRight(
             newRoute: MovieDetails(movieId: movieId));
       default:
-        return MaterialPageRoute(builder: (_) => const UnDefinedWidget());
+        return null;
     }
   }
 }
 
-class UnDefinedWidget extends StatelessWidget {
-  const UnDefinedWidget({super.key});
+// class UnDefinedWidget extends StatelessWidget {
+//   const UnDefinedWidget({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('No Route Found!'),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Scaffold(
+//       body: Center(
+//         child: Text('No Route Found!'),
+//       ),
+//     );
+//   }
+// }
