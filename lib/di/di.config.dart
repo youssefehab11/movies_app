@@ -19,14 +19,14 @@ import '../data/data_source_contract/api_data_source/movies_data_source.dart'
     as _i106;
 import '../data/data_source_contract/api_data_source/similar_movies_data_source.dart'
     as _i656;
-import '../data/data_source_contract/firebase_data_source/cached_user_data_source.dart'
-    as _i26;
 import '../data/data_source_contract/firebase_data_source/login_data_source.dart'
     as _i238;
 import '../data/data_source_contract/firebase_data_source/logout_data_source.dart'
     as _i86;
 import '../data/data_source_contract/firebase_data_source/register_data_source.dart'
     as _i560;
+import '../data/data_source_contract/firebase_data_source/user_data_source.dart'
+    as _i788;
 import '../data/data_source_impl/api_data_source_impl/genres_data_source_impl.dart'
     as _i173;
 import '../data/data_source_impl/api_data_source_impl/movie_details_data_source_impl.dart'
@@ -35,42 +35,42 @@ import '../data/data_source_impl/api_data_source_impl/movies_data_source_impl.da
     as _i104;
 import '../data/data_source_impl/api_data_source_impl/similar_movies_data_source_impl.dart'
     as _i482;
-import '../data/data_source_impl/firebase_data_source_impl/cached_user_impl.dart'
-    as _i513;
 import '../data/data_source_impl/firebase_data_source_impl/login_data_source_impl.dart'
     as _i694;
 import '../data/data_source_impl/firebase_data_source_impl/logout_data_source_impl.dart'
     as _i202;
 import '../data/data_source_impl/firebase_data_source_impl/register_data_source_impl.dart'
     as _i481;
+import '../data/data_source_impl/firebase_data_source_impl/user_data_source_impl.dart'
+    as _i18;
 import '../data/repositry_impl/api_repo_impl/genre_repo_impl.dart' as _i818;
 import '../data/repositry_impl/api_repo_impl/movie_details_repo_impl.dart'
     as _i1005;
 import '../data/repositry_impl/api_repo_impl/movies_repo_impl.dart' as _i1062;
 import '../data/repositry_impl/api_repo_impl/similar_movies_repo_impl.dart'
     as _i1033;
-import '../data/repositry_impl/firebase_repo_impl/cached_user_repo_impl.dart'
-    as _i193;
 import '../data/repositry_impl/firebase_repo_impl/login_repo_impl.dart'
     as _i422;
 import '../data/repositry_impl/firebase_repo_impl/logout_repo_impl.dart'
     as _i257;
 import '../data/repositry_impl/firebase_repo_impl/register_repo_impl.dart'
     as _i392;
+import '../data/repositry_impl/firebase_repo_impl/user_repo_impl.dart' as _i860;
 import '../data/services/api/api_manager.dart' as _i1005;
 import '../data/services/firebase/auth_services.dart' as _i862;
+import '../data/services/firebase/firestore_service.dart' as _i213;
 import '../domain/repositry_contract/api_repo/genres_repo.dart' as _i711;
 import '../domain/repositry_contract/api_repo/movie_details_repo.dart' as _i777;
 import '../domain/repositry_contract/api_repo/movies_repo.dart' as _i160;
 import '../domain/repositry_contract/api_repo/similar_movies_repo.dart'
     as _i217;
-import '../domain/repositry_contract/firebase_repo/cached_user_repo.dart'
-    as _i230;
 import '../domain/repositry_contract/firebase_repo/login_repo.dart' as _i221;
 import '../domain/repositry_contract/firebase_repo/logout_repo.dart' as _i603;
 import '../domain/repositry_contract/firebase_repo/register_repo.dart' as _i60;
+import '../domain/repositry_contract/firebase_repo/user_repo.dart' as _i378;
 import '../domain/use_cases/auth/create_account.dart' as _i624;
 import '../domain/use_cases/auth/get_cached_user.dart' as _i983;
+import '../domain/use_cases/auth/get_user_info.dart' as _i251;
 import '../domain/use_cases/auth/sign_in.dart' as _i559;
 import '../domain/use_cases/auth/sign_out.dart' as _i353;
 import '../domain/use_cases/genres/get_genres.dart' as _i666;
@@ -115,6 +115,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i1005.ApiManager>(() => _i1005.ApiManager());
     gh.singleton<_i862.AuthServices>(() => _i862.AuthServices());
+    gh.singleton<_i213.FireStoreServies>(() => _i213.FireStoreServies());
+    gh.factory<_i788.CachedFirebaseUserDataSource>(
+        () => _i18.CachedUserImpl(authServices: gh<_i862.AuthServices>()));
     gh.factory<_i86.LogoutDataSource>(() =>
         _i202.LogoutDataSourceImpl(authServices: gh<_i862.AuthServices>()));
     gh.factory<_i560.RegisterDataSource>(() =>
@@ -123,24 +126,36 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i694.LoginDataSourceImp(authServices: gh<_i862.AuthServices>()));
     gh.factory<_i221.LoginRepo>(() =>
         _i422.LoginRepoImpl(loginDataSource: gh<_i238.LoginDataSource>()));
-    gh.factory<_i26.CachedFirebaseUserDataSource>(
-        () => _i513.CachedUserImpl(authServices: gh<_i862.AuthServices>()));
     gh.factory<_i656.SimilarMoviesDataSource>(() =>
         _i482.SimilarMoviesDataSourceImpl(apiManager: gh<_i1005.ApiManager>()));
+    gh.factory<_i788.FireStoreUserDataSource>(() =>
+        _i18.FireStoreUserDataSourceImpl(
+            fireStoreServies: gh<_i213.FireStoreServies>()));
     gh.factory<_i101.GenresDataSource>(
         () => _i173.GenresDataSourceImpl(apiManager: gh<_i1005.ApiManager>()));
     gh.factory<_i8.MovieDetailsDataSource>(() =>
         _i400.MovieDetailsDataSourceImpl(apiManager: gh<_i1005.ApiManager>()));
     gh.factory<_i603.LogoutRepo>(() =>
         _i257.LogoutRepoImpl(logoutDataSource: gh<_i86.LogoutDataSource>()));
+    gh.factory<_i378.CachedFirebaseUserRepo>(() =>
+        _i860.CachedFirebaseUserRepoImpl(
+            cachedFirebaseUserDataSource:
+                gh<_i788.CachedFirebaseUserDataSource>()));
     gh.factory<_i559.LoginUseCase>(
         () => _i559.LoginUseCase(loginRepo: gh<_i221.LoginRepo>()));
     gh.factory<_i106.MoviesDataSource>(
         () => _i104.MoviesDataSourceImpl(apiManager: gh<_i1005.ApiManager>()));
+    gh.factory<_i983.GetCachedFirebaseUserUseCase>(() =>
+        _i983.GetCachedFirebaseUserUseCase(
+            cachedFirebaseUserRepo: gh<_i378.CachedFirebaseUserRepo>()));
     gh.factory<_i217.SimilarMoviesRepo>(() => _i1033.SimilarMoviesRepoImpl(
         similarMoviesDataSource: gh<_i656.SimilarMoviesDataSource>()));
+    gh.factory<_i378.FireStoreUserRepo>(() => _i860.FireStroreUserRepoImpl(
+        fireStoreUserDataSource: gh<_i788.FireStoreUserDataSource>()));
     gh.factory<_i24.LoginViewModel>(
         () => _i24.LoginViewModel(loginUseCase: gh<_i559.LoginUseCase>()));
+    gh.factory<_i251.GetUserInfoUseCase>(() => _i251.GetUserInfoUseCase(
+        fireStoreUserRepo: gh<_i378.FireStoreUserRepo>()));
     gh.factory<_i60.RegisterRepo>(() =>
         _i392.RegisterRepoImpl(authDataSource: gh<_i560.RegisterDataSource>()));
     gh.factory<_i160.MoviesRepo>(() =>
@@ -149,16 +164,19 @@ extension GetItInjectableX on _i174.GetIt {
         movieDetailsDataSource: gh<_i8.MovieDetailsDataSource>()));
     gh.factory<_i888.GetMovieDetailsUseCase>(() => _i888.GetMovieDetailsUseCase(
         movieDetailsRepo: gh<_i777.MovieDetailsRepo>()));
+    gh.factory<_i510.AppViewModel>(() => _i510.AppViewModel(
+        getCachedFirebaseUserUseCase:
+            gh<_i983.GetCachedFirebaseUserUseCase>()));
     gh.factory<_i624.CreateAccountUseCase>(
         () => _i624.CreateAccountUseCase(authRepo: gh<_i60.RegisterRepo>()));
-    gh.factory<_i230.CachedFirebaseUserRepo>(() =>
-        _i193.CachedFirebaseUserRepoImpl(
-            cachedFirebaseUserDataSource:
-                gh<_i26.CachedFirebaseUserDataSource>()));
     gh.factory<_i353.SignOutUseCase>(
         () => _i353.SignOutUseCase(logoutRepo: gh<_i603.LogoutRepo>()));
     gh.factory<_i711.GenresRepo>(() =>
         _i818.GenreRepoImpl(genresDataSource: gh<_i101.GenresDataSource>()));
+    gh.factory<_i888.ProfileViewModel>(() => _i888.ProfileViewModel(
+          signOutUseCase: gh<_i353.SignOutUseCase>(),
+          getUserInfoUseCase: gh<_i251.GetUserInfoUseCase>(),
+        ));
     gh.factory<_i340.GetExploreMoviesUseCase>(() =>
         _i340.GetExploreMoviesUseCase(moviesRepo: gh<_i160.MoviesRepo>()));
     gh.factory<_i500.GetNewReleaseMoviesUseCase>(() =>
@@ -183,16 +201,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i828.TopRatedMoviesViewModel>(() =>
         _i828.TopRatedMoviesViewModel(
             getTopRatedMoviesUseCase: gh<_i297.GetTopRatedMoviesUseCase>()));
-    gh.factory<_i983.GetCachedFirebaseUserUseCase>(() =>
-        _i983.GetCachedFirebaseUserUseCase(
-            cachedFirebaseUserRepo: gh<_i230.CachedFirebaseUserRepo>()));
-    gh.factory<_i888.ProfileViewModel>(() =>
-        _i888.ProfileViewModel(signOutUseCase: gh<_i353.SignOutUseCase>()));
     gh.factory<_i666.GetGenresUseCase>(
         () => _i666.GetGenresUseCase(genresRepo: gh<_i711.GenresRepo>()));
-    gh.factory<_i510.AppViewModel>(() => _i510.AppViewModel(
-        getCachedFirebaseUserUseCase:
-            gh<_i983.GetCachedFirebaseUserUseCase>()));
     gh.factory<_i781.GenresViewModel>(() =>
         _i781.GenresViewModel(genresUseCase: gh<_i666.GetGenresUseCase>()));
     gh.factory<_i279.PopluarMoviesViewModel>(() => _i279.PopluarMoviesViewModel(

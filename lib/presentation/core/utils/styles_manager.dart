@@ -22,9 +22,9 @@ class DarkStyles {
     fontWeight: FontWeight.bold,
     color: ColorsManager.white,
   );
-  static TextStyle interW700F36 = TextStyle(
+  static TextStyle interW700F18 = TextStyle(
     fontFamily: FontsManager.interFamily,
-    fontSize: 36.sp,
+    fontSize: 18.sp,
     fontWeight: FontWeight.bold,
     color: ColorsManager.white,
   );

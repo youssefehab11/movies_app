@@ -22,7 +22,11 @@ class ColumnComponent extends StatelessWidget {
             SizedBox(
               height: spaceHight,
             ),
-            Text(tailLabel, style: tailStyle),
+            Text(
+              tailLabel,
+              style: tailStyle,
+              softWrap: true,
+            ),
           ],
         ),
       ],

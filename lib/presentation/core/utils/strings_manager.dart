@@ -32,4 +32,6 @@ class StringsManager {
   static const String confirm = 'Confirm';
   static const String cancel = 'Cancel';
   static const String areYouSureToLogout = 'Are you sure to logout?';
+  static const String wishList = 'Wish List';
+  static const String history = 'History';
 }
