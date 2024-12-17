@@ -7,14 +7,18 @@ class UserDto {
   String? name;
   String? email;
   String? phoneNumber;
-  bool? emailVerfied;
+  bool? isEmailVerified;
+  int? wishListCount;
+  int? historyCount;
 
   UserDto({
     this.id,
     this.name,
     this.email,
     this.phoneNumber,
-    this.emailVerfied = false,
+    this.isEmailVerified = false,
+    this.wishListCount = 0,
+    this.historyCount = 0,
   });
 
   factory UserDto.fromFirestore(
@@ -23,12 +27,13 @@ class UserDto {
   ) {
     final data = snapshot.data();
     return UserDto(
-      id: data?['id'],
-      name: data?['name'],
-      email: data?['email'],
-      phoneNumber: data?['phoneNumber'],
-      emailVerfied: data?['emailVerfied'],
-    );
+        id: data?['id'],
+        name: data?['name'],
+        email: data?['email'],
+        phoneNumber: data?['phoneNumber'],
+        isEmailVerified: data?['isEmailVerified'],
+        wishListCount: data?['wishListCount'],
+        historyCount: data?['historyCount']);
   }
   Map<String, dynamic> toFirestore() {
     return {
@@ -36,16 +41,20 @@ class UserDto {
       if (name != null) "name": name,
       if (email != null) "email": email,
       if (phoneNumber != null) "phoneNumber": phoneNumber,
-      if (emailVerfied != null) "emailVerfied": emailVerfied,
+      if (isEmailVerified != null) "isEmailVerified": isEmailVerified,
+      if (wishListCount != null) "wishListCount": wishListCount,
+      if (historyCount != null) "historyCount": historyCount,
     };
   }
 
   UserEntity toUser() {
     return UserEntity(
-      email: email,
-      id: id,
-      name: name,
-      phoneNumber: phoneNumber,
-    );
+        email: email,
+        id: id,
+        name: name,
+        phoneNumber: phoneNumber,
+        historyCount: historyCount,
+        wishListCount: wishListCount,
+        isEmailVerified: isEmailVerified);
   }
 }
