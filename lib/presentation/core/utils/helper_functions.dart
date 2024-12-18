@@ -6,7 +6,7 @@ void clearFocus() {
   FocusManager.instance.primaryFocus?.unfocus();
 }
 
-String extractFirebaseErrorMessage(ServerError? serverError, Error? error) {
+String extractErrorMessage(ServerError? serverError, Error? error) {
   String errorMessage = StringsManager.somethingWentWrong;
   if (serverError != null) {
     errorMessage =

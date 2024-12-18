@@ -57,8 +57,7 @@ class _LoginState extends State<Login> {
                 posAction: () {
                   Navigator.of(context).pop();
                 },
-                message:
-                    extractFirebaseErrorMessage(state.serverError, state.error),
+                message: extractErrorMessage(state.serverError, state.error),
               );
             }
             if (state is LoginSuccessState) {

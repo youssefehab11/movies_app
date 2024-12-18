@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:movies_app/domain/entities/user.dart';
-import 'package:movies_app/domain/repositry_contract/firebase_repo/login_repo.dart';
+import 'package:movies_app/domain/repositry_contract/firebase_repo/auth/login_repo.dart';
 import 'package:movies_app/domain/result.dart';
 
 @injectable

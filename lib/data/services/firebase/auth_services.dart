@@ -7,10 +7,12 @@ import 'package:movies_app/data/services/firebase/firestore_service.dart';
 import 'package:movies_app/domain/result.dart';
 
 @singleton
+@injectable
 class AuthServices {
   final FirebaseAuth _credential = FirebaseAuth.instance;
-  FireStoreServies fireStoreServies = FireStoreServies();
-  //final FirebaseFirestore _db = FirebaseFirestore.instance;
+  FireStoreServies fireStoreServies;
+  @factoryMethod
+  AuthServices({required this.fireStoreServies});
   Future<Result<UserDto>> createUserWithEmailAndPassword({
     required String email,
     required String password,

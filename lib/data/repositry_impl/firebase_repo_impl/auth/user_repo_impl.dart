@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
-import 'package:movies_app/data/data_source_contract/firebase_data_source/user_data_source.dart';
+import 'package:movies_app/data/data_source_contract/firebase_data_source/auth/user_data_source.dart';
 import 'package:movies_app/data/models/user/user_dto.dart';
 import 'package:movies_app/domain/entities/user.dart';
-import 'package:movies_app/domain/repositry_contract/firebase_repo/user_repo.dart';
+import 'package:movies_app/domain/repositry_contract/firebase_repo/auth/user_repo.dart';
 
 @Injectable(as: CachedFirebaseUserRepo)
 class CachedFirebaseUserRepoImpl extends CachedFirebaseUserRepo {

@@ -6,7 +6,7 @@ import 'package:movies_app/domain/end_points.dart';
 import 'package:movies_app/presentation/core/components/error_widget.dart';
 import 'package:movies_app/presentation/core/components/loading_widget.dart';
 import 'package:movies_app/presentation/ui/movie_details/view_model/movie_details_view_model_cubit.dart';
-import 'package:movies_app/presentation/ui/movie_details/view_model/movie_details_view_model_state.dart';
+import 'package:movies_app/presentation/ui/movie_details/view_model/movie_details_state.dart';
 import 'package:movies_app/presentation/ui/movie_details/widgets/movie_details_app_bar.dart';
 import 'package:movies_app/presentation/ui/movie_details/widgets/movie_info.dart';
 import 'package:movies_app/presentation/ui/movie_details/widgets/poster_section.dart';
@@ -34,36 +34,48 @@ class _MovieDetailsState extends State<MovieDetails> {
       movieId: widget.movieId,
       endPoint: EndPoints.movieDetails,
     );
+    viewModel.checkMovieInWishList(widget.movieId);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: const MovieDetailsAppBar(),
-      body: BlocProvider(
-        create: (context) => viewModel,
-        child: BlocBuilder<MovieDetailsViewModel, MovieDetailsStates>(
-          builder: (context, state) {
-            switch (state) {
-              case MovieDetailsLoadingState():
-                return const LoadingWidget();
-              case MovieDetailsSucceseState():
-                return SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      PosterSection(movie: state.movie),
-                      SizedBox(height: 16.h),
-                      SimilarMovies(movieId: widget.movieId),
-                      MovieInfo(movie: state.movie),
-                    ],
-                  ),
-                );
-              case MovieDetailsErrorState():
-                return const AppErrorWidget();
+    return BlocProvider(
+      create: (context) => viewModel,
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: const MovieDetailsAppBar(),
+        body: BlocBuilder<MovieDetailsViewModel, MovieDetailsStates>(
+          buildWhen: (previous, current) {
+            if (current is MovieDetailsLoadingState ||
+                current is MovieDetailsErrorState ||
+                current is MovieDetailsSuccessState) {
+              return true;
             }
+            return false;
+          },
+          builder: (context, state) {
+            if (state is MovieDetailsErrorState) {
+              return AppErrorWidget(
+                error: state.error,
+                serverError: state.serverError,
+              );
+            }
+            if (state is MovieDetailsSuccessState) {
+              return SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    PosterSection(movie: state.movie),
+                    SizedBox(height: 16.h),
+                    SimilarMovies(movieId: widget.movieId),
+                    MovieInfo(movie: state.movie),
+                  ],
+                ),
+              );
+            }
+
+            return const LoadingWidget();
           },
         ),
       ),

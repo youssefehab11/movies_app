@@ -16,7 +16,6 @@ class AppViewModel extends Cubit<AppState> {
   AppViewModel({required this.getCachedFirebaseUserUseCase})
       : super(AppInitialState()) {
     firebaseUser = getCachedFirebaseUserUseCase.execute();
-    print('User id >>>>>>>>>>>>>:${firebaseUser?.uid}');
   }
 
   String checkAutoLogin() {

@@ -1,8 +1,8 @@
 import 'package:injectable/injectable.dart';
-import 'package:movies_app/data/data_source_contract/firebase_data_source/login_data_source.dart';
+import 'package:movies_app/data/data_source_contract/firebase_data_source/auth/login_data_source.dart';
 import 'package:movies_app/data/models/user/user_dto.dart';
 import 'package:movies_app/domain/entities/user.dart';
-import 'package:movies_app/domain/repositry_contract/firebase_repo/login_repo.dart';
+import 'package:movies_app/domain/repositry_contract/firebase_repo/auth/login_repo.dart';
 import 'package:movies_app/domain/result.dart';
 
 @Injectable(as: LoginRepo)

@@ -45,7 +45,7 @@ class UserActions extends StatelessWidget {
                   context: context,
                   posActionTitle: StringsManager.ok,
                   posAction: () => Navigator.of(context).pop(),
-                  message: extractFirebaseErrorMessage(
+                  message: extractErrorMessage(
                     state.serverError,
                     state.error,
                   ),
