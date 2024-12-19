@@ -41,4 +41,32 @@ class AppDialogs {
       },
     );
   }
+
+  static void showLoadingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          content: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const CircularProgressIndicator(),
+              const SizedBox(
+                width: 20,
+              ),
+              Text(
+                'Loading...',
+                style: DarkStyles.robotW400F16,
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  static void hideLoading(BuildContext context) {
+    Navigator.of(context).pop();
+  }
 }

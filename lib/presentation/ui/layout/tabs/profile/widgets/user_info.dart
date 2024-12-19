@@ -15,34 +15,37 @@ class UserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        ColumnComponent(
-          head: CircleAvatar(
-            radius: 48.r,
-            child: Image.asset('assets/images/profile_test.png'),
+    return SafeArea(
+      bottom: false,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          ColumnComponent(
+            head: CircleAvatar(
+              radius: 48.r,
+              child: Image.asset('assets/images/profile_test.png'),
+            ),
+            tailLabel: user?.name?.formatProfileName ?? '',
+            tailStyle: DarkStyles.interW700F16,
           ),
-          tailLabel: user?.name?.formatProfileName ?? '',
-          tailStyle: DarkStyles.interW700F16,
-        ),
-        ColumnComponent(
-          head: Text(
-            user?.wishListCount.toString() ?? '',
-            style: DarkStyles.interW700F24,
+          ColumnComponent(
+            head: Text(
+              user?.wishListCount.toString() ?? '',
+              style: DarkStyles.interW700F24,
+            ),
+            tailLabel: StringsManager.wishList,
+            tailStyle: DarkStyles.interW700F18,
           ),
-          tailLabel: StringsManager.wishList,
-          tailStyle: DarkStyles.interW700F18,
-        ),
-        ColumnComponent(
-          head: Text(
-            user?.historyCount.toString() ?? '',
-            style: DarkStyles.interW700F24,
-          ),
-          tailLabel: StringsManager.history,
-          tailStyle: DarkStyles.interW700F18,
-        )
-      ],
+          ColumnComponent(
+            head: Text(
+              user?.historyCount.toString() ?? '',
+              style: DarkStyles.interW700F24,
+            ),
+            tailLabel: StringsManager.history,
+            tailStyle: DarkStyles.interW700F18,
+          )
+        ],
+      ),
     );
   }
 }

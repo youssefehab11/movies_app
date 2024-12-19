@@ -5,4 +5,5 @@ abstract class WishListRepo {
   Future<Result<String>> saveMovieToWishList(Movie movie);
   Future<Result<bool>> isMovieInWishList(int movieId);
   Future<Result<String>> removeMovieToWishList(Movie movie);
+  Future<Result<List<Movie>>> getWishList();
 }

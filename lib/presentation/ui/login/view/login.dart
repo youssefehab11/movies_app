@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/di/di.dart';
-import 'package:movies_app/presentation/application/app_view_model.dart';
 import 'package:movies_app/presentation/core/components/app_logo.dart';
 import 'package:movies_app/presentation/core/router/routes.dart';
 import 'package:movies_app/presentation/core/utils/app_dialogs.dart';
@@ -61,7 +60,7 @@ class _LoginState extends State<Login> {
               );
             }
             if (state is LoginSuccessState) {
-              context.read<AppViewModel>().appUser = state.user;
+              //context.read<AppViewModel>().appUser = state.user;
               return AppDialogs.showMeesageDialog(
                 context: context,
                 posActionTitle: StringsManager.ok,

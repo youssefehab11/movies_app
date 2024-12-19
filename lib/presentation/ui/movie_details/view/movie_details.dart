@@ -54,11 +54,17 @@ class _MovieDetailsState extends State<MovieDetails> {
             return false;
           },
           builder: (context, state) {
+            if (state is MovieDetailsLoadingState) {
+              return const LoadingWidget();
+            }
             if (state is MovieDetailsErrorState) {
               return AppErrorWidget(
                 error: state.error,
                 serverError: state.serverError,
               );
+            }
+            if (state is CheckWishListLoadingState) {
+              return const LoadingWidget();
             }
             if (state is MovieDetailsSuccessState) {
               return SingleChildScrollView(
@@ -75,7 +81,7 @@ class _MovieDetailsState extends State<MovieDetails> {
               );
             }
 
-            return const LoadingWidget();
+            return const SizedBox();
           },
         ),
       ),

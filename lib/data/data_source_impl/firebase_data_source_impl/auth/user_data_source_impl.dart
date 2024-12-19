@@ -25,7 +25,7 @@ class FireStoreUserDataSourceImpl extends FireStoreUserDataSource {
   FireStoreUserDataSourceImpl({required this.fireStoreServies});
 
   @override
-  Future<UserDto?> getUserFromFireStore(String userId) {
-    return fireStoreServies.getUserFromFireStore(userId);
+  Future<UserDto?> getUserFromFireStore() {
+    return fireStoreServies.getUserFromFireStore();
   }
 }

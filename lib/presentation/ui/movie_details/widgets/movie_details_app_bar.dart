@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:movies_app/presentation/core/utils/app_dialogs.dart';
 import 'package:movies_app/presentation/core/utils/assets_manager.dart';
 import 'package:movies_app/presentation/core/utils/colors_manager.dart';
 import 'package:movies_app/presentation/core/utils/helper_functions.dart';
@@ -81,8 +82,9 @@ class MovieDetailsAppBar extends StatelessWidget
     }
   }
 
-  void buildListener(BuildContext context, MovieDetailsStates state) {
+  void buildListener(BuildContext context, MovieDetailsStates state) async {
     if (state is AddWishListSuccessState) {
+      AppDialogs.hideLoading(context);
       Fluttertoast.showToast(
         msg: state.message,
         toastLength: Toast.LENGTH_LONG,
@@ -94,6 +96,7 @@ class MovieDetailsAppBar extends StatelessWidget
       );
     }
     if (state is AddWishListErrorState) {
+      AppDialogs.hideLoading(context);
       Fluttertoast.showToast(
         msg: extractErrorMessage(state.serverError, state.error),
         toastLength: Toast.LENGTH_LONG,
@@ -105,6 +108,7 @@ class MovieDetailsAppBar extends StatelessWidget
       );
     }
     if (state is RemoveWishListSuccessState) {
+      AppDialogs.hideLoading(context);
       Fluttertoast.showToast(
         msg: state.message,
         toastLength: Toast.LENGTH_LONG,
@@ -116,6 +120,7 @@ class MovieDetailsAppBar extends StatelessWidget
       );
     }
     if (state is RemoveWishListErrorState) {
+      AppDialogs.hideLoading(context);
       Fluttertoast.showToast(
         msg: extractErrorMessage(state.serverError, state.error),
         toastLength: Toast.LENGTH_LONG,
@@ -125,6 +130,10 @@ class MovieDetailsAppBar extends StatelessWidget
         textColor: Colors.white,
         fontSize: 16.0,
       );
+    }
+    if (state is AddWishListLoadingState ||
+        state is RemoveWishListLoadingState) {
+      AppDialogs.showLoadingDialog(context);
     }
   }
 

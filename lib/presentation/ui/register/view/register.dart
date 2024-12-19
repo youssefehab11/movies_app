@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/di/di.dart';
-import 'package:movies_app/presentation/application/app_view_model.dart';
 import 'package:movies_app/presentation/core/components/app_logo.dart';
 import 'package:movies_app/presentation/core/components/default_app_bar.dart';
 import 'package:movies_app/presentation/core/router/routes.dart';
@@ -69,7 +68,7 @@ class _RegisterState extends State<Register> {
               );
             }
             if (state is RegisterSuccessState) {
-              context.read<AppViewModel>().appUser = state.user;
+              //context.read<AppViewModel>().appUser = state.user;
               AppDialogs.showMeesageDialog(
                 context: context,
                 title: StringsManager.success,

@@ -25,4 +25,9 @@ class WishListDataSourceImpl extends WishListDataSource {
   Future<Result<String>> removeFromWishList(Movie movie) {
     return fireStoreServies.removeMovieFromWishList(movie);
   }
+
+  @override
+  Future<Result<List<Movie>>> getWishList() {
+    return fireStoreServies.getWishList();
+  }
 }

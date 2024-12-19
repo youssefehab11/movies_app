@@ -25,4 +25,9 @@ class WishListRepoImpl extends WishListRepo {
   Future<Result<String>> removeMovieToWishList(Movie movie) {
     return wishListDataSource.removeFromWishList(movie);
   }
+
+  @override
+  Future<Result<List<Movie>>> getWishList() {
+    return wishListDataSource.getWishList();
+  }
 }

@@ -8,7 +8,7 @@ class GetUserInfoUseCase {
   @factoryMethod
   GetUserInfoUseCase({required this.fireStoreUserRepo});
 
-  Future<UserEntity?> execute(String userId) {
-    return fireStoreUserRepo.getFireStoreUser(userId);
+  Future<UserEntity?> execute() {
+    return fireStoreUserRepo.getFireStoreUser();
   }
 }

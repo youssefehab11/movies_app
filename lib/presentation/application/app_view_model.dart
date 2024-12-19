@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:movies_app/domain/entities/user.dart';
 import 'package:movies_app/domain/use_cases/auth/get_cached_user.dart';
 import 'package:movies_app/presentation/application/app_state.dart';
 import 'package:movies_app/presentation/core/router/routes.dart';
@@ -9,7 +8,7 @@ import 'package:movies_app/presentation/core/router/routes.dart';
 @injectable
 class AppViewModel extends Cubit<AppState> {
   User? firebaseUser;
-  UserEntity? appUser;
+  //UserEntity? appUser;
   GetCachedFirebaseUserUseCase getCachedFirebaseUserUseCase;
 
   @factoryMethod
@@ -25,8 +24,8 @@ class AppViewModel extends Cubit<AppState> {
     return Routes.login;
   }
 
-  void clearUsers() {
+  void clearUser() {
     firebaseUser = null;
-    appUser = null;
+    //appUser = null;
   }
 }

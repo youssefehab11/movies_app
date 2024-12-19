@@ -25,9 +25,8 @@ class FireStroreUserRepoImpl extends FireStoreUserRepo {
   FireStroreUserRepoImpl({required this.fireStoreUserDataSource});
 
   @override
-  Future<UserEntity?> getFireStoreUser(String userId) async {
-    UserDto? userdto =
-        await fireStoreUserDataSource.getUserFromFireStore(userId);
+  Future<UserEntity?> getFireStoreUser() async {
+    UserDto? userdto = await fireStoreUserDataSource.getUserFromFireStore();
     if (userdto != null) {
       UserEntity userEntity = userdto.toUser();
       return userEntity;

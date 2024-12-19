@@ -95,6 +95,7 @@ import '../domain/use_cases/movies/get_new_release_movies.dart' as _i500;
 import '../domain/use_cases/movies/get_popular_movies.dart' as _i646;
 import '../domain/use_cases/movies/get_similar_movies.dart' as _i107;
 import '../domain/use_cases/movies/get_top_rated_movies.dart' as _i297;
+import '../domain/use_cases/movies/get_wish_list.dart' as _i967;
 import '../domain/use_cases/movies/remove_movie_from_wish_list.dart' as _i406;
 import '../presentation/application/app_view_model.dart' as _i510;
 import '../presentation/ui/layout/tabs/explore/view_models/explore_movies/explore_movies_view_model.dart'
@@ -171,6 +172,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i406.RemoveMovieFromWishListUseCase>(() =>
         _i406.RemoveMovieFromWishListUseCase(
             wishListRepo: gh<_i486.WishListRepo>()));
+    gh.factory<_i967.GetWishListUseCase>(
+        () => _i967.GetWishListUseCase(wishListRepo: gh<_i486.WishListRepo>()));
     gh.factory<_i100.LogoutDataSource>(() =>
         _i717.LogoutDataSourceImpl(authServices: gh<_i862.AuthServices>()));
     gh.factory<_i125.FireStoreUserRepo>(() => _i495.FireStroreUserRepoImpl(
@@ -233,6 +236,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i888.ProfileViewModel>(() => _i888.ProfileViewModel(
           signOutUseCase: gh<_i353.SignOutUseCase>(),
           getUserInfoUseCase: gh<_i251.GetUserInfoUseCase>(),
+          getWishListUseCase: gh<_i967.GetWishListUseCase>(),
         ));
     gh.factory<_i279.PopluarMoviesViewModel>(() => _i279.PopluarMoviesViewModel(
         getPopularMoviesUseCase: gh<_i646.GetPopularMoviesUseCase>()));
