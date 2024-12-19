@@ -1,3 +1,4 @@
+import 'package:movies_app/domain/entities/movie.dart';
 import 'package:movies_app/domain/entities/user.dart';
 import 'package:movies_app/domain/result.dart';
 
@@ -20,4 +21,17 @@ class ProfileInfoErrorState extends ProfileState {}
 class ProfileInfoSuccessState extends ProfileState {
   UserEntity user;
   ProfileInfoSuccessState({required this.user});
+}
+
+class WishListLoadingState extends ProfileState {}
+
+class WishListErrorState extends ProfileState {
+  ServerError? serverError;
+  Error? error;
+  WishListErrorState({this.error, this.serverError});
+}
+
+class WishListSuccessState extends ProfileState {
+  List<Movie> movies;
+  WishListSuccessState({required this.movies});
 }

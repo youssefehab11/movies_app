@@ -37,7 +37,7 @@ class UserActions extends StatelessWidget {
           BlocListener<ProfileViewModel, ProfileState>(
             listener: (context, state) {
               if (state is LogoutSuccessState) {
-                context.read<AppViewModel>().clearUsers();
+                context.read<AppViewModel>().clearUser();
                 Navigator.of(context).pushReplacementNamed(Routes.login);
               }
               if (state is LogoutErrorState) {
@@ -45,7 +45,7 @@ class UserActions extends StatelessWidget {
                   context: context,
                   posActionTitle: StringsManager.ok,
                   posAction: () => Navigator.of(context).pop(),
-                  message: extractFirebaseErrorMessage(
+                  message: extractErrorMessage(
                     state.serverError,
                     state.error,
                   ),

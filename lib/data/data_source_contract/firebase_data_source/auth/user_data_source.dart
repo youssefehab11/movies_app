@@ -6,5 +6,5 @@ abstract class CachedFirebaseUserDataSource {
 }
 
 abstract class FireStoreUserDataSource {
-  Future<UserDto?> getUserFromFireStore(String userId);
+  Future<UserDto?> getUserFromFireStore();
 }

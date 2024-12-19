@@ -6,5 +6,5 @@ abstract class CachedFirebaseUserRepo {
 }
 
 abstract class FireStoreUserRepo {
-  Future<UserEntity?> getFireStoreUser(String userId);
+  Future<UserEntity?> getFireStoreUser();
 }

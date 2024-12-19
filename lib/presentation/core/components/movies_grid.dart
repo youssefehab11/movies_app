@@ -24,7 +24,8 @@ class MoviesDefaultGrid extends StatelessWidget {
       scrollDirection: scrollDirection,
       controller: scrollController,
       padding: EdgeInsets.zero,
-      physics: const BouncingScrollPhysics(),
+      physics:
+          const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
         mainAxisSpacing: 16.h,

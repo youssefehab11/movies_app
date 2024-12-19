@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movies_app/data/models/user/user_dto.dart';
@@ -7,10 +6,12 @@ import 'package:movies_app/data/services/firebase/firestore_service.dart';
 import 'package:movies_app/domain/result.dart';
 
 @singleton
+@injectable
 class AuthServices {
   final FirebaseAuth _credential = FirebaseAuth.instance;
-  FireStoreServies fireStoreServies = FireStoreServies();
-  //final FirebaseFirestore _db = FirebaseFirestore.instance;
+  FireStoreServies fireStoreServies;
+  @factoryMethod
+  AuthServices({required this.fireStoreServies});
   Future<Result<UserDto>> createUserWithEmailAndPassword({
     required String email,
     required String password,
@@ -48,10 +49,9 @@ class AuthServices {
   Future<Result<UserDto?>> signInWithEmailAndPassword(
       String email, String password) async {
     try {
-      UserCredential userCredential = await _credential
-          .signInWithEmailAndPassword(email: email, password: password);
-      UserDto? userDto = await fireStoreServies
-          .getUserFromFireStore(userCredential.user?.uid ?? '');
+      await _credential.signInWithEmailAndPassword(
+          email: email, password: password);
+      UserDto? userDto = await fireStoreServies.getUserFromFireStore();
       return Success(data: userDto);
     } on FirebaseAuthException catch (exception) {
       if (exception.code == FirebaseCodes.invalidCredintials.value) {

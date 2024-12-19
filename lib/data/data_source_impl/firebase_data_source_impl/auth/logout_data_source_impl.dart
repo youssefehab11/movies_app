@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:movies_app/data/data_source_contract/firebase_data_source/logout_data_source.dart';
+import 'package:movies_app/data/data_source_contract/firebase_data_source/auth/logout_data_source.dart';
 import 'package:movies_app/data/services/firebase/auth_services.dart';
 import 'package:movies_app/domain/result.dart';
 

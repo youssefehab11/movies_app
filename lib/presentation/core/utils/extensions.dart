@@ -6,7 +6,13 @@ extension NumbersFormat on num {
 }
 
 extension FormatString on String {
-  String get formatedDate => substring(0, 4);
+  String get formatedDate {
+    print(this);
+    if (length >= 4) {
+      return substring(0, 4);
+    }
+    return this;
+  }
 
   String get formatProfileName {
     List<String> words = split(' ');
