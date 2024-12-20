@@ -34,4 +34,5 @@ class StringsManager {
   static const String areYouSureToLogout = 'Are you sure to logout?';
   static const String wishList = 'Wish List';
   static const String history = 'History';
+  static const String watch = 'watch';
 }

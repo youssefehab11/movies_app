@@ -11,6 +11,6 @@ class RemoveMovieFromWishListUseCase {
   RemoveMovieFromWishListUseCase({required this.wishListRepo});
 
   Future<Result<String>> execute(Movie movie) {
-    return wishListRepo.removeMovieToWishList(movie);
+    return wishListRepo.removeMovieFromWishList(movie);
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movies_app/domain/entities/movie.dart';
 import 'package:movies_app/domain/result.dart';
+import 'package:movies_app/domain/use_cases/movies/add_movie_to_history.dart';
 import 'package:movies_app/domain/use_cases/movies/add_movie_to_wish_list.dart';
 import 'package:movies_app/domain/use_cases/movies/check_movie_in_wish_list.dart';
 import 'package:movies_app/domain/use_cases/movies/get_movie_details.dart';
@@ -12,6 +13,7 @@ import 'package:movies_app/presentation/ui/movie_details/view_models/movie_detai
 class MovieDetailsViewModel extends Cubit<MovieDetailsStates> {
   GetMovieDetailsUseCase getMovieDetailsUseCase;
   AddMovieToWishListUseCase addMovieToWishListUseCase;
+  AddMovieToHistoryUseCase addMovieToHistoryUseCase;
   CheckMovieInWishListUseCase checkMovieInWishListUseCase;
   RemoveMovieFromWishListUseCase removeMovieFromWishListUseCase;
   Movie? movie;
@@ -23,6 +25,7 @@ class MovieDetailsViewModel extends Cubit<MovieDetailsStates> {
     required this.addMovieToWishListUseCase,
     required this.checkMovieInWishListUseCase,
     required this.removeMovieFromWishListUseCase,
+    required this.addMovieToHistoryUseCase,
   }) : super(MovieDetailsLoadingState());
 
   void getMovieDetailsById({
@@ -83,5 +86,9 @@ class MovieDetailsViewModel extends Cubit<MovieDetailsStates> {
       case Error<bool>():
         emit(CheckWishListErrorState(error: result));
     }
+  }
+
+  void addMovieToHistory(Movie movie) async {
+    await addMovieToHistoryUseCase.execute(movie);
   }
 }
