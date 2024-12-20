@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movies_app/data/models/user/user_dto.dart';
 import 'package:movies_app/data/services/firebase/auth_exceptions.dart';
@@ -51,7 +52,7 @@ class AuthServices {
     try {
       await _credential.signInWithEmailAndPassword(
           email: email, password: password);
-      UserDto? userDto = await fireStoreServies.getUserFromFireStore();
+      UserDto? userDto;
       return Success(data: userDto);
     } on FirebaseAuthException catch (exception) {
       if (exception.code == FirebaseCodes.invalidCredintials.value) {

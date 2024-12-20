@@ -7,8 +7,8 @@ import 'package:movies_app/presentation/core/utils/app_dialogs.dart';
 import 'package:movies_app/presentation/core/utils/assets_manager.dart';
 import 'package:movies_app/presentation/core/utils/colors_manager.dart';
 import 'package:movies_app/presentation/core/utils/helper_functions.dart';
-import 'package:movies_app/presentation/ui/movie_details/view_model/movie_details_state.dart';
-import 'package:movies_app/presentation/ui/movie_details/view_model/movie_details_view_model_cubit.dart';
+import 'package:movies_app/presentation/ui/movie_details/view_models/movie_details_state.dart';
+import 'package:movies_app/presentation/ui/movie_details/view_models/movie_details_view_model_cubit.dart';
 
 class MovieDetailsAppBar extends StatelessWidget
     implements PreferredSizeWidget {

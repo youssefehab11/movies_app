@@ -8,6 +8,7 @@ import 'package:movies_app/presentation/ui/layout/tabs/home/view_models/new_rele
 import 'package:movies_app/presentation/ui/layout/tabs/home/view_models/top_rated_movies/top_rated_view_model.dart';
 import 'package:movies_app/presentation/ui/login/view/login.dart';
 import 'package:movies_app/presentation/ui/movie_details/view/movie_details.dart';
+import 'package:movies_app/presentation/ui/stream_video/view/stream_video.dart';
 import 'package:movies_app/presentation/ui/register/view/register.dart';
 
 class RouteManager {
@@ -34,6 +35,8 @@ class RouteManager {
         int movieId = settings.arguments as int;
         return RouteBuilder.slideRight(
             newRoute: MovieDetails(movieId: movieId));
+      case Routes.streamVideo:
+        return MaterialPageRoute(builder: (_) => const StreamVideo());
       default:
         return null;
     }

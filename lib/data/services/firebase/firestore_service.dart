@@ -8,8 +8,9 @@ import 'package:movies_app/domain/result.dart';
 @singleton
 class FireStoreServies {
   final FirebaseFirestore db = FirebaseFirestore.instance;
-  String userId = FirebaseAuth.instance.currentUser?.uid ?? '';
+
   Future<UserDto?> getUserFromFireStore() async {
+    String userId = FirebaseAuth.instance.currentUser?.uid ?? '';
     final ref =
         db.collection(UserDto.usersCollection).doc(userId).withConverter(
               fromFirestore: UserDto.fromFirestore,
@@ -31,6 +32,7 @@ class FireStoreServies {
   }
 
   Future<Result<String>> saveMovieToWishList(Movie movie) async {
+    String userId = FirebaseAuth.instance.currentUser?.uid ?? '';
     try {
       final docRef = db
           .collection(UserDto.usersCollection)
@@ -52,6 +54,7 @@ class FireStoreServies {
   }
 
   Future<Result<String>> removeMovieFromWishList(Movie movie) async {
+    String userId = FirebaseAuth.instance.currentUser?.uid ?? '';
     try {
       await db
           .collection(UserDto.usersCollection)
@@ -76,6 +79,7 @@ class FireStoreServies {
   }
 
   Future<Result<bool>> isMovieInWishList(int movieId) async {
+    String userId = FirebaseAuth.instance.currentUser?.uid ?? '';
     try {
       final docRef = db
           .collection(UserDto.usersCollection)
@@ -97,6 +101,7 @@ class FireStoreServies {
   }
 
   Future<Result<List<Movie>>> getWishList() async {
+    String userId = FirebaseAuth.instance.currentUser?.uid ?? '';
     try {
       final ref = db
           .collection(UserDto.usersCollection)

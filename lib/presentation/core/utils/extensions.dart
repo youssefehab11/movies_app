@@ -26,9 +26,16 @@ extension FormatString on String {
 }
 
 extension IntegerFormat on int {
-  String get formatedInt {
+  String get formatnumOfLikes {
     if (this >= 1000) {
       return '${this ~/ 1000}k';
+    }
+    return '$this';
+  }
+
+  String get formatvideoStreamDuration {
+    if (this < 10) {
+      return '0$this';
     }
     return '$this';
   }

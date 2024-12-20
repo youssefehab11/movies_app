@@ -112,9 +112,9 @@ import '../presentation/ui/layout/tabs/profile/view_model/profile_view_model.dar
     as _i888;
 import '../presentation/ui/login/login_view_model/login_view_model.dart'
     as _i24;
-import '../presentation/ui/movie_details/view_model/movie_details_view_model_cubit.dart'
+import '../presentation/ui/movie_details/view_models/movie_details_view_model_cubit.dart'
     as _i210;
-import '../presentation/ui/movie_details/view_model/similar_movies_view_model.dart'
+import '../presentation/ui/movie_details/view_models/similar_movies_view_model.dart'
     as _i933;
 import '../presentation/ui/register/view_model/register_view_model.dart'
     as _i1014;

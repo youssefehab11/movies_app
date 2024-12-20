@@ -38,7 +38,7 @@ class _NewReleaseMoviesState extends State<NewReleaseMovies> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: REdgeInsets.all(4.0),
               child: RowTitleComponent(
                 onTap: () {
                   onSeeMorePressed();

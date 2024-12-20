@@ -6,7 +6,7 @@ import 'package:movies_app/domain/use_cases/movies/add_movie_to_wish_list.dart';
 import 'package:movies_app/domain/use_cases/movies/check_movie_in_wish_list.dart';
 import 'package:movies_app/domain/use_cases/movies/get_movie_details.dart';
 import 'package:movies_app/domain/use_cases/movies/remove_movie_from_wish_list.dart';
-import 'package:movies_app/presentation/ui/movie_details/view_model/movie_details_state.dart';
+import 'package:movies_app/presentation/ui/movie_details/view_models/movie_details_state.dart';
 
 @injectable
 class MovieDetailsViewModel extends Cubit<MovieDetailsStates> {

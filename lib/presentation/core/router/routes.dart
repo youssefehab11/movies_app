@@ -5,4 +5,5 @@ class Routes {
   static const String allNewReleaseMovies = '/allNewReleaseMovies';
   static const String allTopRatedMovies = '/allTopRatedMovies';
   static const String movieDetails = '/movieDetails';
+  static const String streamVideo = '/streamVideo';
 }
