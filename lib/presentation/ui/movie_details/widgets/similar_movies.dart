@@ -7,8 +7,8 @@ import 'package:movies_app/presentation/core/components/loading_widget.dart';
 import 'package:movies_app/presentation/core/components/movies_grid.dart';
 import 'package:movies_app/presentation/core/utils/strings_manager.dart';
 import 'package:movies_app/presentation/core/utils/styles_manager.dart';
-import 'package:movies_app/presentation/ui/movie_details/view_model/similar_movies_states.dart';
-import 'package:movies_app/presentation/ui/movie_details/view_model/similar_movies_view_model.dart';
+import 'package:movies_app/presentation/ui/movie_details/view_models/similar_movies_states.dart';
+import 'package:movies_app/presentation/ui/movie_details/view_models/similar_movies_view_model.dart';
 
 class SimilarMovies extends StatefulWidget {
   final int movieId;

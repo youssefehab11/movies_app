@@ -19,7 +19,10 @@ class PopularMoviesContent extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(AssetsManager.availableNow),
+          Image.asset(
+            AssetsManager.availableNow,
+            height: 135.h,
+          ),
           SizedBox(
             height: 351.h,
             child: BlocBuilder<PopluarMoviesViewModel, PopularMoviesStates>(
@@ -67,7 +70,10 @@ class PopularMoviesContent extends StatelessWidget {
               },
             ),
           ),
-          Image.asset(AssetsManager.watchNow),
+          Image.asset(
+            AssetsManager.watchNow,
+            height: 120.h,
+          ),
         ],
       ),
     );

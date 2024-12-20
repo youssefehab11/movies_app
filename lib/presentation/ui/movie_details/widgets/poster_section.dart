@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/domain/entities/movie.dart';
 import 'package:movies_app/presentation/core/components/app_button.dart';
 import 'package:movies_app/presentation/core/components/gradient_bg.dart';
+import 'package:movies_app/presentation/core/router/routes.dart';
 import 'package:movies_app/presentation/core/utils/assets_manager.dart';
 import 'package:movies_app/presentation/core/utils/colors_manager.dart';
 import 'package:movies_app/presentation/core/utils/constants.dart';
@@ -50,7 +51,9 @@ class PosterSection extends StatelessWidget {
           child: AppButton(
             btnLabel: 'Watch',
             labelStyle: DarkStyles.interW700F20,
-            onBtnPressed: () {},
+            onBtnPressed: () {
+              Navigator.pushNamed(context, Routes.streamVideo);
+            },
             color: ColorsManager.red,
           ),
         ),
@@ -61,7 +64,7 @@ class PosterSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             CustomChip(
-              title: movie.voteCount?.formatedInt ?? '',
+              title: movie.voteCount?.formatnumOfLikes ?? '',
               labelStyle: DarkStyles.interW700F20,
               iconPath: AssetsManager.loveIc,
             ),

@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:movies_app/domain/entities/movie.dart';
 import 'package:movies_app/domain/result.dart';
 import 'package:movies_app/domain/use_cases/movies/get_similar_movies.dart';
-import 'package:movies_app/presentation/ui/movie_details/view_model/similar_movies_states.dart';
+import 'package:movies_app/presentation/ui/movie_details/view_models/similar_movies_states.dart';
 
 @injectable
 class SimilarMoviesViewModel extends Cubit<SimilarMoviesStates> {

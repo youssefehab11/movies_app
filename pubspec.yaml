@@ -49,6 +49,7 @@ dependencies:
   firebase_auth: ^5.3.4
   cloud_firestore: ^5.5.1
   fluttertoast: ^8.2.10
+  video_player: ^2.9.2
 
 dev_dependencies:
   # add the generator to your dev_dependencies  

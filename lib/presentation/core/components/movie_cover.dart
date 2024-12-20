@@ -40,7 +40,7 @@ class MovieCover extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: movie?.posterPath ?? '',
               width: 230.w,
-              height: 350.h,
+              height: 340.h,
               fit: BoxFit.cover,
               progressIndicatorBuilder: (context, url, downloadProgress) =>
                   Center(

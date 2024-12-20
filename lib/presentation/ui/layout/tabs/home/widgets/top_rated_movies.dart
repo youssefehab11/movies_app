@@ -37,7 +37,7 @@ class _TopRatedMoviesState extends State<TopRatedMovies> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: REdgeInsets.all(4.0),
               child: RowTitleComponent(
                 onTap: () => onSeeMorePressed(context),
                 title: StringsManager.topRated,
