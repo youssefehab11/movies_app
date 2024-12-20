@@ -5,6 +5,7 @@ import 'package:movies_app/domain/entities/user.dart';
 import 'package:movies_app/domain/result.dart';
 import 'package:movies_app/domain/use_cases/auth/get_user_info.dart';
 import 'package:movies_app/domain/use_cases/auth/sign_out.dart';
+import 'package:movies_app/domain/use_cases/movies/get_history.dart';
 import 'package:movies_app/domain/use_cases/movies/get_wish_list.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/profile/view_model/profile_state.dart';
 
@@ -13,13 +14,16 @@ class ProfileViewModel extends Cubit<ProfileState> {
   SignOutUseCase signOutUseCase;
   GetUserInfoUseCase getUserInfoUseCase;
   GetWishListUseCase getWishListUseCase;
-  List<Movie> movies = [];
+  GetHistoryUseCase getHistoryUseCase;
+  List<Movie> wishlistMovies = [];
+  List<Movie> historytMovies = [];
 
   @factoryMethod
   ProfileViewModel({
     required this.signOutUseCase,
     required this.getUserInfoUseCase,
     required this.getWishListUseCase,
+    required this.getHistoryUseCase,
   }) : super(LogoutInitialState());
 
   void logout() async {
@@ -49,12 +53,26 @@ class ProfileViewModel extends Cubit<ProfileState> {
     Result<List<Movie>> result = await getWishListUseCase.execute();
     switch (result) {
       case Success<List<Movie>>():
-        movies = result.data;
-        emit(WishListSuccessState(movies: movies));
+        wishlistMovies = result.data;
+        emit(WishListSuccessState(movies: wishlistMovies));
       case ServerError<List<Movie>>():
         emit(WishListErrorState(serverError: result));
       case Error<List<Movie>>():
         emit(WishListErrorState(error: result));
+    }
+  }
+
+  Future<void> getHistory() async {
+    emit(HistoryLoadingState());
+    Result<List<Movie>> result = await getHistoryUseCase.execute();
+    switch (result) {
+      case Success<List<Movie>>():
+        historytMovies = result.data;
+        emit(HistorySuccessState(movies: historytMovies));
+      case ServerError<List<Movie>>():
+        emit(HistoryErrorState(serverError: result));
+      case Error<List<Movie>>():
+        emit(HistoryErrorState(error: result));
     }
   }
 }

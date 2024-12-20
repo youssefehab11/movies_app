@@ -10,10 +10,14 @@ import 'package:movies_app/domain/entities/movie.dart';
 class MovieCover extends StatelessWidget {
   final double ratePadding;
   final Movie? movie;
+  final int width;
+  final int height;
   final coverBorderRadius = 16;
   const MovieCover({
     super.key,
     this.ratePadding = 15,
+    this.height = 340,
+    this.width = 230,
     required this.movie,
   });
 
@@ -39,8 +43,8 @@ class MovieCover extends StatelessWidget {
             ),
             child: CachedNetworkImage(
               imageUrl: movie?.posterPath ?? '',
-              width: 230.w,
-              height: 340.h,
+              width: width.w,
+              height: height.h,
               fit: BoxFit.cover,
               progressIndicatorBuilder: (context, url, downloadProgress) =>
                   Center(

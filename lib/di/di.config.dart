@@ -27,6 +27,8 @@ import '../data/data_source_contract/firebase_data_source/auth/register_data_sou
     as _i538;
 import '../data/data_source_contract/firebase_data_source/auth/user_data_source.dart'
     as _i868;
+import '../data/data_source_contract/firebase_data_source/firestore/history_data_source.dart'
+    as _i509;
 import '../data/data_source_contract/firebase_data_source/firestore/wish_list_data_source.dart'
     as _i64;
 import '../data/data_source_impl/api_data_source_impl/genres_data_source_impl.dart'
@@ -45,6 +47,8 @@ import '../data/data_source_impl/firebase_data_source_impl/auth/register_data_so
     as _i1038;
 import '../data/data_source_impl/firebase_data_source_impl/auth/user_data_source_impl.dart'
     as _i341;
+import '../data/data_source_impl/firebase_data_source_impl/firestore/history_data_source_impl.dart'
+    as _i952;
 import '../data/data_source_impl/firebase_data_source_impl/firestore/wish_list_data_source_impl.dart'
     as _i685;
 import '../data/repositry_impl/api_repo_impl/genre_repo_impl.dart' as _i818;
@@ -61,6 +65,8 @@ import '../data/repositry_impl/firebase_repo_impl/auth/register_repo_impl.dart'
     as _i902;
 import '../data/repositry_impl/firebase_repo_impl/auth/user_repo_impl.dart'
     as _i495;
+import '../data/repositry_impl/firebase_repo_impl/firestore/history_repo_impl.dart'
+    as _i706;
 import '../data/repositry_impl/firebase_repo_impl/firestore/wish_list_repo_impl.dart'
     as _i464;
 import '../data/services/api/api_manager.dart' as _i1005;
@@ -79,6 +85,8 @@ import '../domain/repositry_contract/firebase_repo/auth/register_repo.dart'
     as _i769;
 import '../domain/repositry_contract/firebase_repo/auth/user_repo.dart'
     as _i125;
+import '../domain/repositry_contract/firebase_repo/firestore/history_repo.dart'
+    as _i368;
 import '../domain/repositry_contract/firebase_repo/firestore/wish_list_repo.dart'
     as _i486;
 import '../domain/use_cases/auth/create_account.dart' as _i624;
@@ -87,15 +95,18 @@ import '../domain/use_cases/auth/get_user_info.dart' as _i251;
 import '../domain/use_cases/auth/sign_in.dart' as _i559;
 import '../domain/use_cases/auth/sign_out.dart' as _i353;
 import '../domain/use_cases/genres/get_genres.dart' as _i666;
+import '../domain/use_cases/movies/add_movie_to_history.dart' as _i515;
 import '../domain/use_cases/movies/add_movie_to_wish_list.dart' as _i900;
 import '../domain/use_cases/movies/check_movie_in_wish_list.dart' as _i530;
 import '../domain/use_cases/movies/get_explore_movies.dart' as _i340;
+import '../domain/use_cases/movies/get_history.dart' as _i549;
 import '../domain/use_cases/movies/get_movie_details.dart' as _i888;
 import '../domain/use_cases/movies/get_new_release_movies.dart' as _i500;
 import '../domain/use_cases/movies/get_popular_movies.dart' as _i646;
 import '../domain/use_cases/movies/get_similar_movies.dart' as _i107;
 import '../domain/use_cases/movies/get_top_rated_movies.dart' as _i297;
 import '../domain/use_cases/movies/get_wish_list.dart' as _i967;
+import '../domain/use_cases/movies/remove_movie_from_histroy.dart' as _i321;
 import '../domain/use_cases/movies/remove_movie_from_wish_list.dart' as _i406;
 import '../presentation/application/app_view_model.dart' as _i510;
 import '../presentation/ui/layout/tabs/explore/view_models/explore_movies/explore_movies_view_model.dart'
@@ -113,9 +124,9 @@ import '../presentation/ui/layout/tabs/profile/view_model/profile_view_model.dar
 import '../presentation/ui/login/login_view_model/login_view_model.dart'
     as _i24;
 import '../presentation/ui/movie_details/view_models/movie_details_view_model_cubit.dart'
-    as _i210;
+    as _i671;
 import '../presentation/ui/movie_details/view_models/similar_movies_view_model.dart'
-    as _i933;
+    as _i410;
 import '../presentation/ui/register/view_model/register_view_model.dart'
     as _i1014;
 
@@ -143,6 +154,8 @@ extension GetItInjectableX on _i174.GetIt {
         _i400.MovieDetailsDataSourceImpl(apiManager: gh<_i1005.ApiManager>()));
     gh.factory<_i64.WishListDataSource>(() => _i685.WishListDataSourceImpl(
         fireStoreServies: gh<_i213.FireStoreServies>()));
+    gh.factory<_i509.HistoryDataSource>(() => _i952.HistoryDataSourceImpl(
+        fireStoreServies: gh<_i213.FireStoreServies>()));
     gh.singleton<_i862.AuthServices>(() =>
         _i862.AuthServices(fireStoreServies: gh<_i213.FireStoreServies>()));
     gh.factory<_i486.WishListRepo>(() => _i464.WishListRepoImpl(
@@ -159,6 +172,8 @@ extension GetItInjectableX on _i174.GetIt {
         movieDetailsDataSource: gh<_i8.MovieDetailsDataSource>()));
     gh.factory<_i888.GetMovieDetailsUseCase>(() => _i888.GetMovieDetailsUseCase(
         movieDetailsRepo: gh<_i777.MovieDetailsRepo>()));
+    gh.factory<_i368.HistoryRepo>(() => _i706.HistoryRepoImpl(
+        historyDataSource: gh<_i509.HistoryDataSource>()));
     gh.factory<_i538.RegisterDataSource>(() =>
         _i1038.RegisterDataSourceImpl(authServices: gh<_i862.AuthServices>()));
     gh.factory<_i197.LoginDataSource>(
@@ -169,15 +184,22 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i530.CheckMovieInWishListUseCase>(() =>
         _i530.CheckMovieInWishListUseCase(
             wishListRepo: gh<_i486.WishListRepo>()));
+    gh.factory<_i967.GetWishListUseCase>(
+        () => _i967.GetWishListUseCase(wishListRepo: gh<_i486.WishListRepo>()));
     gh.factory<_i406.RemoveMovieFromWishListUseCase>(() =>
         _i406.RemoveMovieFromWishListUseCase(
             wishListRepo: gh<_i486.WishListRepo>()));
-    gh.factory<_i967.GetWishListUseCase>(
-        () => _i967.GetWishListUseCase(wishListRepo: gh<_i486.WishListRepo>()));
     gh.factory<_i100.LogoutDataSource>(() =>
         _i717.LogoutDataSourceImpl(authServices: gh<_i862.AuthServices>()));
     gh.factory<_i125.FireStoreUserRepo>(() => _i495.FireStroreUserRepoImpl(
         fireStoreUserDataSource: gh<_i868.FireStoreUserDataSource>()));
+    gh.factory<_i515.AddMovieToHistoryUseCase>(() =>
+        _i515.AddMovieToHistoryUseCase(historyRepo: gh<_i368.HistoryRepo>()));
+    gh.factory<_i549.GetHistoryUseCase>(
+        () => _i549.GetHistoryUseCase(historyRepo: gh<_i368.HistoryRepo>()));
+    gh.factory<_i321.RemoveMovieFromHistoryUseCase>(() =>
+        _i321.RemoveMovieFromHistoryUseCase(
+            historyRepo: gh<_i368.HistoryRepo>()));
     gh.factory<_i711.GenresRepo>(() =>
         _i818.GenreRepoImpl(genresDataSource: gh<_i101.GenresDataSource>()));
     gh.factory<_i125.CachedFirebaseUserRepo>(() =>
@@ -215,13 +237,6 @@ extension GetItInjectableX on _i174.GetIt {
         fireStoreUserRepo: gh<_i125.FireStoreUserRepo>()));
     gh.factory<_i666.GetGenresUseCase>(
         () => _i666.GetGenresUseCase(genresRepo: gh<_i711.GenresRepo>()));
-    gh.factory<_i210.MovieDetailsViewModel>(() => _i210.MovieDetailsViewModel(
-          getMovieDetailsUseCase: gh<_i888.GetMovieDetailsUseCase>(),
-          addMovieToWishListUseCase: gh<_i900.AddMovieToWishListUseCase>(),
-          checkMovieInWishListUseCase: gh<_i530.CheckMovieInWishListUseCase>(),
-          removeMovieFromWishListUseCase:
-              gh<_i406.RemoveMovieFromWishListUseCase>(),
-        ));
     gh.factory<_i35.LoginRepo>(() =>
         _i508.LoginRepoImpl(loginDataSource: gh<_i197.LoginDataSource>()));
     gh.factory<_i510.AppViewModel>(() => _i510.AppViewModel(
@@ -231,19 +246,28 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i624.CreateAccountUseCase(authRepo: gh<_i769.RegisterRepo>()));
     gh.factory<_i353.SignOutUseCase>(
         () => _i353.SignOutUseCase(logoutRepo: gh<_i748.LogoutRepo>()));
+    gh.factory<_i671.MovieDetailsViewModel>(() => _i671.MovieDetailsViewModel(
+          getMovieDetailsUseCase: gh<_i888.GetMovieDetailsUseCase>(),
+          addMovieToWishListUseCase: gh<_i900.AddMovieToWishListUseCase>(),
+          checkMovieInWishListUseCase: gh<_i530.CheckMovieInWishListUseCase>(),
+          removeMovieFromWishListUseCase:
+              gh<_i406.RemoveMovieFromWishListUseCase>(),
+          addMovieToHistoryUseCase: gh<_i515.AddMovieToHistoryUseCase>(),
+        ));
     gh.factory<_i781.GenresViewModel>(() =>
         _i781.GenresViewModel(genresUseCase: gh<_i666.GetGenresUseCase>()));
-    gh.factory<_i888.ProfileViewModel>(() => _i888.ProfileViewModel(
-          signOutUseCase: gh<_i353.SignOutUseCase>(),
-          getUserInfoUseCase: gh<_i251.GetUserInfoUseCase>(),
-          getWishListUseCase: gh<_i967.GetWishListUseCase>(),
-        ));
     gh.factory<_i279.PopluarMoviesViewModel>(() => _i279.PopluarMoviesViewModel(
         getPopularMoviesUseCase: gh<_i646.GetPopularMoviesUseCase>()));
     gh.factory<_i1014.RegisterViewModel>(() => _i1014.RegisterViewModel(
         createAccountUseCase: gh<_i624.CreateAccountUseCase>()));
-    gh.factory<_i933.SimilarMoviesViewModel>(() => _i933.SimilarMoviesViewModel(
+    gh.factory<_i410.SimilarMoviesViewModel>(() => _i410.SimilarMoviesViewModel(
         getSimilarMoviesUseCase: gh<_i107.GetSimilarMoviesUseCase>()));
+    gh.factory<_i888.ProfileViewModel>(() => _i888.ProfileViewModel(
+          signOutUseCase: gh<_i353.SignOutUseCase>(),
+          getUserInfoUseCase: gh<_i251.GetUserInfoUseCase>(),
+          getWishListUseCase: gh<_i967.GetWishListUseCase>(),
+          getHistoryUseCase: gh<_i549.GetHistoryUseCase>(),
+        ));
     gh.factory<_i559.LoginUseCase>(
         () => _i559.LoginUseCase(loginRepo: gh<_i35.LoginRepo>()));
     gh.factory<_i24.LoginViewModel>(

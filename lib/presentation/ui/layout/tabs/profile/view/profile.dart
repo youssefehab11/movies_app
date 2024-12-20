@@ -21,6 +21,7 @@ class _ProfileState extends State<Profile> {
     viewModel = getIt<ProfileViewModel>();
     viewModel.getUserInfo();
     viewModel.getWishList();
+    viewModel.getHistory();
   }
 
   @override

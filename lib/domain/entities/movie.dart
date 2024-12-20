@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:movies_app/domain/entities/genre.dart';
 
 class Movie {
-  static const String wishListCollection = 'Wish List';
+  static const String wishListCollection = 'Wishlist';
+  static const String historyCollection = 'History';
   String? backdropPath;
   List<Genre>? genres;
   int? id;

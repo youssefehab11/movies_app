@@ -35,3 +35,16 @@ class WishListSuccessState extends ProfileState {
   List<Movie> movies;
   WishListSuccessState({required this.movies});
 }
+
+class HistoryLoadingState extends ProfileState {}
+
+class HistoryErrorState extends ProfileState {
+  ServerError? serverError;
+  Error? error;
+  HistoryErrorState({this.error, this.serverError});
+}
+
+class HistorySuccessState extends ProfileState {
+  List<Movie> movies;
+  HistorySuccessState({required this.movies});
+}

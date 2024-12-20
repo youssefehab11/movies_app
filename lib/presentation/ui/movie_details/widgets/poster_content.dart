@@ -8,10 +8,12 @@ import 'package:movies_app/presentation/core/utils/styles_manager.dart';
 class PosterContent extends StatelessWidget {
   final String movieTitle;
   final String releaseDate;
+  final Function(BuildContext) onPlayPressed;
   const PosterContent({
     super.key,
     required this.movieTitle,
     required this.releaseDate,
+    required this.onPlayPressed,
   });
 
   @override
@@ -19,9 +21,12 @@ class PosterContent extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          child: SvgPicture.asset(
-            AssetsManager.playIc,
-            height: 90.h,
+          child: GestureDetector(
+            onTap: () => onPlayPressed(context),
+            child: SvgPicture.asset(
+              AssetsManager.playIc,
+              height: 90.h,
+            ),
           ),
         ),
         Text(

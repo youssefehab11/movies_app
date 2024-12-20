@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/domain/entities/movie.dart';
 import 'package:movies_app/presentation/core/components/app_button.dart';
@@ -8,7 +9,9 @@ import 'package:movies_app/presentation/core/utils/assets_manager.dart';
 import 'package:movies_app/presentation/core/utils/colors_manager.dart';
 import 'package:movies_app/presentation/core/utils/constants.dart';
 import 'package:movies_app/presentation/core/utils/extensions.dart';
+import 'package:movies_app/presentation/core/utils/strings_manager.dart';
 import 'package:movies_app/presentation/core/utils/styles_manager.dart';
+import 'package:movies_app/presentation/ui/movie_details/view_models/movie_details_view_model_cubit.dart';
 import 'package:movies_app/presentation/ui/movie_details/widgets/custom_chip.dart';
 import 'package:movies_app/presentation/ui/movie_details/widgets/poster_content.dart';
 
@@ -38,6 +41,7 @@ class PosterSection extends StatelessWidget {
                 ],
               ),
               PosterContent(
+                onPlayPressed: watchMovie,
                 movieTitle: movie.title ?? '',
                 releaseDate: movie.releaseDate?.formatedDate ?? '',
               ),
@@ -49,11 +53,9 @@ class PosterSection extends StatelessWidget {
           width: double.infinity,
           margin: REdgeInsets.symmetric(horizontal: 16.0),
           child: AppButton(
-            btnLabel: 'Watch',
+            btnLabel: StringsManager.watch,
             labelStyle: DarkStyles.interW700F20,
-            onBtnPressed: () {
-              Navigator.pushNamed(context, Routes.streamVideo);
-            },
+            onBtnPressed: () => watchMovie(context),
             color: ColorsManager.red,
           ),
         ),
@@ -82,5 +84,10 @@ class PosterSection extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void watchMovie(BuildContext context) {
+    context.read<MovieDetailsViewModel>().addMovieToHistory(movie);
+    Navigator.pushNamed(context, Routes.streamVideo);
   }
 }
