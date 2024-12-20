@@ -6,4 +6,5 @@ class Routes {
   static const String allTopRatedMovies = '/allTopRatedMovies';
   static const String movieDetails = '/movieDetails';
   static const String streamVideo = '/streamVideo';
+  static const String editProfile = '/editProfile';
 }

@@ -218,4 +218,19 @@ class FireStoreServies {
       return Error(exception: exception);
     }
   }
+
+  Future<Result<String>> editProfile(String newName, String newPhone) async {
+    String userId = FirebaseAuth.instance.currentUser?.uid ?? '';
+    try {
+      await db.collection(UserDto.usersCollection).doc(userId).update({
+        'name': newName,
+        'phone': newPhone,
+      });
+      return Success(data: 'Updated Successfully');
+    } on FirebaseException catch (exception) {
+      return ServerError(statusMessage: exception.message);
+    } on Exception catch (exception) {
+      return Error(exception: exception);
+    }
+  }
 }

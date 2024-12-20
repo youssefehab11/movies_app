@@ -15,6 +15,7 @@ class AppTextField extends StatelessWidget {
   final String? prefixSvg;
   final IconData? suffixIcon;
   final bool isObsecure;
+  final void Function(String)? onChanged;
   const AppTextField({
     super.key,
     required this.controller,
@@ -22,6 +23,7 @@ class AppTextField extends StatelessWidget {
     required this.keyboardType,
     required this.textInputAction,
     this.onSuffixIconPressed,
+    this.onChanged,
     this.isObsecure = false,
     this.prefixSvg,
     this.suffixIcon,
@@ -33,6 +35,7 @@ class AppTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
+      onChanged: (input) => onChanged?.call(input),
       textInputAction: textInputAction,
       style: const TextStyle(color: ColorsManager.white),
       validator: validator,

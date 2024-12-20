@@ -9,7 +9,7 @@ import 'package:movies_app/presentation/ui/layout/tabs/profile/view_model/profil
 import 'package:movies_app/presentation/ui/layout/tabs/profile/view_model/profile_view_model.dart';
 
 class WishlistTabContent extends StatelessWidget {
-  final Function(BuildContext) onRefresh;
+  final Future<void> Function() onRefresh;
   const WishlistTabContent({
     super.key,
     required this.onRefresh,
@@ -46,7 +46,7 @@ class WishlistTabContent extends StatelessWidget {
           backgroundColor: ColorsManager.mainGrey,
           displacement: 8,
           color: ColorsManager.yellow,
-          onRefresh: () => onRefresh(context),
+          onRefresh: () => onRefresh(),
           child: MoviesDefaultGrid(
             movies: context.watch<ProfileViewModel>().wishlistMovies,
             crossAxisCount: 3,

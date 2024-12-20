@@ -15,7 +15,11 @@ import 'package:movies_app/presentation/ui/layout/tabs/profile/view_model/profil
 import 'package:movies_app/presentation/ui/layout/tabs/profile/view_model/profile_view_model.dart';
 
 class UserActions extends StatelessWidget {
-  const UserActions({super.key});
+  final VoidCallback onEditProfilePressed;
+  const UserActions({
+    super.key,
+    required this.onEditProfilePressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +30,7 @@ class UserActions extends StatelessWidget {
           Expanded(
             flex: 2,
             child: AppButton(
-              onBtnPressed: () {},
+              onBtnPressed: () => onEditProfilePressed(),
               hasSuffixIcon: true,
               btnLabel: StringsManager.editProfile,
             ),

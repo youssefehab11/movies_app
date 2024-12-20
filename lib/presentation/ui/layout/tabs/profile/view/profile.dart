@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/di/di.dart';
+import 'package:movies_app/presentation/core/router/routes.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/profile/view_model/profile_view_model.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/profile/widgets/info_section.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/profile/widgets/profile_tab_bar.dart';
@@ -28,13 +29,25 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => viewModel,
-      child: const Column(
+      child: Column(
         children: [
-          InfoSection(),
-          UserActions(),
-          ProfileTabBar(),
+          const InfoSection(),
+          UserActions(
+            onEditProfilePressed: onEditProfilePressed,
+          ),
+          ProfileTabBar(
+            onProfileRefresh: onRefreshProfile,
+          ),
         ],
       ),
     );
+  }
+
+  void onEditProfilePressed() {
+    Navigator.pushNamed(context, Routes.editProfile, arguments: viewModel);
+  }
+
+  Future<void> onRefreshProfile() async {
+    viewModel.refreshProfile();
   }
 }

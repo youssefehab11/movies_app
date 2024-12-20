@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/presentation/core/animation/navigation.dart';
 import 'package:movies_app/presentation/core/router/routes.dart';
+import 'package:movies_app/presentation/ui/edit_profile/view/edit_profile.dart';
 import 'package:movies_app/presentation/ui/layout/main_layout.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/home/view/all_new_release_movies.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/home/view/all_top_rated_movies.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/home/view_models/new_release_movies/new_release_movies_view_model.dart';
 import 'package:movies_app/presentation/ui/layout/tabs/home/view_models/top_rated_movies/top_rated_view_model.dart';
+import 'package:movies_app/presentation/ui/layout/tabs/profile/view_model/profile_view_model.dart';
 import 'package:movies_app/presentation/ui/login/view/login.dart';
 import 'package:movies_app/presentation/ui/movie_details/view/movie_details.dart';
 import 'package:movies_app/presentation/ui/stream_video/view/stream_video.dart';
@@ -35,6 +37,12 @@ class RouteManager {
         int movieId = settings.arguments as int;
         return RouteBuilder.slideRight(
             newRoute: MovieDetails(movieId: movieId));
+      case Routes.editProfile:
+        ProfileViewModel args = settings.arguments as ProfileViewModel;
+        return RouteBuilder.slideRight(
+            newRoute: EditProfile(
+          profileViewModel: args,
+        ));
       case Routes.streamVideo:
         return MaterialPageRoute(builder: (_) => const StreamVideo());
       default:

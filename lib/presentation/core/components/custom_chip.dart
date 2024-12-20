@@ -29,7 +29,7 @@ class CustomChip extends StatelessWidget {
         title,
         style: labelStyle,
       ),
-      backgroundColor: ColorsManager.mainGrey,
+      backgroundColor: ColorsManager.mainDark,
     );
   }
 }

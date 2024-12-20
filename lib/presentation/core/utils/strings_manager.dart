@@ -1,5 +1,5 @@
 class StringsManager {
-  static const String searchText = "Search";
+  static const String search = "Search";
   static const String newReleases = "New Release";
   static const String topRated = "Top Rated";
   static const String seeMore = "See more";
@@ -35,4 +35,7 @@ class StringsManager {
   static const String wishList = 'Wish List';
   static const String history = 'History';
   static const String watch = 'watch';
+  static const String noMoviesFound = 'No movies found!';
+  static const String deleteAccount = 'Delete Account';
+  static const String updateData = 'Update Data';
 }

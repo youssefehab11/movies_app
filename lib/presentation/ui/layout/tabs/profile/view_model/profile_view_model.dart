@@ -17,6 +17,7 @@ class ProfileViewModel extends Cubit<ProfileState> {
   GetHistoryUseCase getHistoryUseCase;
   List<Movie> wishlistMovies = [];
   List<Movie> historytMovies = [];
+  UserEntity? user;
 
   @factoryMethod
   ProfileViewModel({
@@ -40,9 +41,9 @@ class ProfileViewModel extends Cubit<ProfileState> {
 
   void getUserInfo() async {
     emit(ProfileInfoLoadingState());
-    UserEntity? user = await getUserInfoUseCase.execute();
+    user = await getUserInfoUseCase.execute();
     if (user != null) {
-      emit(ProfileInfoSuccessState(user: user));
+      emit(ProfileInfoSuccessState(user: user!));
     } else {
       emit(ProfileInfoErrorState());
     }
@@ -74,5 +75,11 @@ class ProfileViewModel extends Cubit<ProfileState> {
       case Error<List<Movie>>():
         emit(HistoryErrorState(error: result));
     }
+  }
+
+  void refreshProfile() async {
+    getUserInfo();
+    getWishList();
+    getHistory();
   }
 }

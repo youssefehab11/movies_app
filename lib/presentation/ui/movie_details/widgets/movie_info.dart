@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/domain/entities/movie.dart';
 import 'package:movies_app/presentation/core/utils/strings_manager.dart';
 import 'package:movies_app/presentation/core/utils/styles_manager.dart';
-import 'package:movies_app/presentation/ui/movie_details/widgets/custom_chip.dart';
+import 'package:movies_app/presentation/core/components/custom_chip.dart';
 
 class MovieInfo extends StatelessWidget {
   final Movie movie;

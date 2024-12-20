@@ -12,7 +12,7 @@ import 'package:movies_app/presentation/core/utils/extensions.dart';
 import 'package:movies_app/presentation/core/utils/strings_manager.dart';
 import 'package:movies_app/presentation/core/utils/styles_manager.dart';
 import 'package:movies_app/presentation/ui/movie_details/view_models/movie_details_view_model_cubit.dart';
-import 'package:movies_app/presentation/ui/movie_details/widgets/custom_chip.dart';
+import 'package:movies_app/presentation/core/components/custom_chip.dart';
 import 'package:movies_app/presentation/ui/movie_details/widgets/poster_content.dart';
 
 class PosterSection extends StatelessWidget {

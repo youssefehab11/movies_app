@@ -27,6 +27,8 @@ import '../data/data_source_contract/firebase_data_source/auth/register_data_sou
     as _i538;
 import '../data/data_source_contract/firebase_data_source/auth/user_data_source.dart'
     as _i868;
+import '../data/data_source_contract/firebase_data_source/firestore/edit_profile_data_source.dart'
+    as _i169;
 import '../data/data_source_contract/firebase_data_source/firestore/history_data_source.dart'
     as _i509;
 import '../data/data_source_contract/firebase_data_source/firestore/wish_list_data_source.dart'
@@ -47,6 +49,8 @@ import '../data/data_source_impl/firebase_data_source_impl/auth/register_data_so
     as _i1038;
 import '../data/data_source_impl/firebase_data_source_impl/auth/user_data_source_impl.dart'
     as _i341;
+import '../data/data_source_impl/firebase_data_source_impl/firestore/edit_profile_data_source_impl.dart'
+    as _i815;
 import '../data/data_source_impl/firebase_data_source_impl/firestore/history_data_source_impl.dart'
     as _i952;
 import '../data/data_source_impl/firebase_data_source_impl/firestore/wish_list_data_source_impl.dart'
@@ -65,6 +69,8 @@ import '../data/repositry_impl/firebase_repo_impl/auth/register_repo_impl.dart'
     as _i902;
 import '../data/repositry_impl/firebase_repo_impl/auth/user_repo_impl.dart'
     as _i495;
+import '../data/repositry_impl/firebase_repo_impl/firestore/edit_profile_repo_impl.dart'
+    as _i1015;
 import '../data/repositry_impl/firebase_repo_impl/firestore/history_repo_impl.dart'
     as _i706;
 import '../data/repositry_impl/firebase_repo_impl/firestore/wish_list_repo_impl.dart'
@@ -85,11 +91,14 @@ import '../domain/repositry_contract/firebase_repo/auth/register_repo.dart'
     as _i769;
 import '../domain/repositry_contract/firebase_repo/auth/user_repo.dart'
     as _i125;
+import '../domain/repositry_contract/firebase_repo/firestore/edit_profile_repo.dart'
+    as _i242;
 import '../domain/repositry_contract/firebase_repo/firestore/history_repo.dart'
     as _i368;
 import '../domain/repositry_contract/firebase_repo/firestore/wish_list_repo.dart'
     as _i486;
 import '../domain/use_cases/auth/create_account.dart' as _i624;
+import '../domain/use_cases/auth/edit_profile.dart' as _i202;
 import '../domain/use_cases/auth/get_cached_user.dart' as _i983;
 import '../domain/use_cases/auth/get_user_info.dart' as _i251;
 import '../domain/use_cases/auth/sign_in.dart' as _i559;
@@ -108,7 +117,9 @@ import '../domain/use_cases/movies/get_top_rated_movies.dart' as _i297;
 import '../domain/use_cases/movies/get_wish_list.dart' as _i967;
 import '../domain/use_cases/movies/remove_movie_from_histroy.dart' as _i321;
 import '../domain/use_cases/movies/remove_movie_from_wish_list.dart' as _i406;
+import '../domain/use_cases/movies/search_movies.dart' as _i307;
 import '../presentation/application/app_view_model.dart' as _i510;
+import '../presentation/ui/edit_profile/view_model/view_model.dart' as _i384;
 import '../presentation/ui/layout/tabs/explore/view_models/explore_movies/explore_movies_view_model.dart'
     as _i53;
 import '../presentation/ui/layout/tabs/explore/view_models/genres/genres_view_model.dart'
@@ -121,6 +132,8 @@ import '../presentation/ui/layout/tabs/home/view_models/top_rated_movies/top_rat
     as _i828;
 import '../presentation/ui/layout/tabs/profile/view_model/profile_view_model.dart'
     as _i888;
+import '../presentation/ui/layout/tabs/search/view_model/search_view_model.dart'
+    as _i219;
 import '../presentation/ui/login/login_view_model/login_view_model.dart'
     as _i24;
 import '../presentation/ui/movie_details/view_models/movie_details_view_model_cubit.dart'
@@ -164,6 +177,9 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i104.MoviesDataSourceImpl(apiManager: gh<_i1005.ApiManager>()));
     gh.factory<_i217.SimilarMoviesRepo>(() => _i1033.SimilarMoviesRepoImpl(
         similarMoviesDataSource: gh<_i656.SimilarMoviesDataSource>()));
+    gh.factory<_i169.EditProfileDataSource>(() =>
+        _i815.EditProfileDataSourceImpl(
+            fireStoreServies: gh<_i213.FireStoreServies>()));
     gh.factory<_i868.CachedFirebaseUserDataSource>(
         () => _i341.CachedUserImpl(authServices: gh<_i862.AuthServices>()));
     gh.factory<_i160.MoviesRepo>(() =>
@@ -214,8 +230,12 @@ extension GetItInjectableX on _i174.GetIt {
         _i646.GetPopularMoviesUseCase(moviesRepo: gh<_i160.MoviesRepo>()));
     gh.factory<_i297.GetTopRatedMoviesUseCase>(() =>
         _i297.GetTopRatedMoviesUseCase(moviesRepo: gh<_i160.MoviesRepo>()));
+    gh.factory<_i307.SearchMoviesUseCase>(
+        () => _i307.SearchMoviesUseCase(moviesRepo: gh<_i160.MoviesRepo>()));
     gh.factory<_i53.ExploreMoviesViewModel>(() => _i53.ExploreMoviesViewModel(
         getMoviesUseCase: gh<_i340.GetExploreMoviesUseCase>()));
+    gh.factory<_i242.EditProfileRepo>(() => _i1015.EditProfileRepoImpl(
+        editProfileDataSource: gh<_i169.EditProfileDataSource>()));
     gh.factory<_i355.NewReleaseMoviesViewModel>(() =>
         _i355.NewReleaseMoviesViewModel(
             getNewReleaseMoviesUseCase:
@@ -223,6 +243,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i107.GetSimilarMoviesUseCase>(() =>
         _i107.GetSimilarMoviesUseCase(
             similarMoviesRepo: gh<_i217.SimilarMoviesRepo>()));
+    gh.factory<_i219.SearchViewModel>(() => _i219.SearchViewModel(
+        searchMoviesUseCase: gh<_i307.SearchMoviesUseCase>()));
     gh.factory<_i769.RegisterRepo>(() =>
         _i902.RegisterRepoImpl(authDataSource: gh<_i538.RegisterDataSource>()));
     gh.factory<_i748.LogoutRepo>(() =>
@@ -254,6 +276,8 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i406.RemoveMovieFromWishListUseCase>(),
           addMovieToHistoryUseCase: gh<_i515.AddMovieToHistoryUseCase>(),
         ));
+    gh.factory<_i202.EditProfileUseCase>(() =>
+        _i202.EditProfileUseCase(editProfileRepo: gh<_i242.EditProfileRepo>()));
     gh.factory<_i781.GenresViewModel>(() =>
         _i781.GenresViewModel(genresUseCase: gh<_i666.GetGenresUseCase>()));
     gh.factory<_i279.PopluarMoviesViewModel>(() => _i279.PopluarMoviesViewModel(
@@ -270,6 +294,8 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i559.LoginUseCase>(
         () => _i559.LoginUseCase(loginRepo: gh<_i35.LoginRepo>()));
+    gh.factory<_i384.EditProfileViewModel>(() => _i384.EditProfileViewModel(
+        editProfileUseCase: gh<_i202.EditProfileUseCase>()));
     gh.factory<_i24.LoginViewModel>(
         () => _i24.LoginViewModel(loginUseCase: gh<_i559.LoginUseCase>()));
     return this;
