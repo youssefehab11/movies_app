@@ -76,7 +76,7 @@ class RegisterFields extends StatelessWidget {
           onSuffixIconPressed: () {
             viewModel.togglePasswordVisibilty();
           },
-          isObsecure: !viewModel.isVisiblePassword,
+          isObsecure: !context.watch<RegisterViewModel>().isVisiblePassword,
         ),
         SizedBox(height: spaceBetweenFields.h),
         AppTextField(
@@ -99,7 +99,8 @@ class RegisterFields extends StatelessWidget {
           onSuffixIconPressed: () {
             viewModel.toggleConfirmPasswordVisibilty();
           },
-          isObsecure: !viewModel.isVisibleConfirmPassword,
+          isObsecure:
+              !context.watch<RegisterViewModel>().isVisibleConfirmPassword,
         ),
         SizedBox(height: spaceBetweenFields.h),
         AppTextField(

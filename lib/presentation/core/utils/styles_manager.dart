@@ -28,6 +28,12 @@ class DarkStyles {
     fontWeight: FontWeight.bold,
     color: ColorsManager.white,
   );
+  static TextStyle interW500F20 = TextStyle(
+    fontFamily: FontsManager.interFamily,
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w500,
+    color: ColorsManager.white,
+  );
   static TextStyle robotW400F18 = TextStyle(
     fontFamily: FontsManager.robotoFamily,
     fontSize: 18.sp,

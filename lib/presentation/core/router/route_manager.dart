@@ -10,6 +10,8 @@ import 'package:movies_app/presentation/ui/layout/tabs/home/view_models/top_rate
 import 'package:movies_app/presentation/ui/layout/tabs/profile/view_model/profile_view_model.dart';
 import 'package:movies_app/presentation/ui/login/view/login.dart';
 import 'package:movies_app/presentation/ui/movie_details/view/movie_details.dart';
+import 'package:movies_app/presentation/ui/onboarding/views/intro.dart';
+import 'package:movies_app/presentation/ui/onboarding/views/onboarding.dart';
 import 'package:movies_app/presentation/ui/stream_video/view/stream_video.dart';
 import 'package:movies_app/presentation/ui/register/view/register.dart';
 
@@ -45,6 +47,10 @@ class RouteManager {
         ));
       case Routes.streamVideo:
         return MaterialPageRoute(builder: (_) => const StreamVideo());
+      case Routes.intro:
+        return MaterialPageRoute(builder: (_) => const Intro());
+      case Routes.onboarding:
+        return MaterialPageRoute(builder: (_) => const Onboarding());
       default:
         return null;
     }
