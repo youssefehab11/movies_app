@@ -50,6 +50,8 @@ dependencies:
   cloud_firestore: ^5.5.1
   fluttertoast: ^8.2.10
   video_player: ^2.9.2
+  shared_preferences: ^2.3.4
+  flutter_native_splash: ^2.4.3
 
 dev_dependencies:
   # add the generator to your dev_dependencies  

@@ -6,6 +6,7 @@ import 'package:movies_app/presentation/application/app_view_model.dart';
 import 'package:movies_app/presentation/config/theme.dart';
 import 'package:movies_app/data/services/api/api_manager.dart';
 import 'package:movies_app/presentation/core/router/route_manager.dart';
+import 'package:movies_app/presentation/core/router/routes.dart';
 
 class MoviesApp extends StatelessWidget {
   const MoviesApp({super.key});
@@ -21,11 +22,18 @@ class MoviesApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: (settings) => RouteManager.onGenerateRoute(settings),
-        initialRoute: context.read<AppViewModel>().checkAutoLogin(),
+        initialRoute: getInitialRoute(context),
         theme: AppTheme.lightTheme,
       ),
     );
   }
+}
+
+String getInitialRoute(BuildContext context) {
+  if (context.read<AppViewModel>().isOnboarding == false) {
+    return context.read<AppViewModel>().checkAutoLogin();
+  }
+  return Routes.intro;
 }
 
 void edgeToEdgeInit() {

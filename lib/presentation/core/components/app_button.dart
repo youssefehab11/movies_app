@@ -54,7 +54,7 @@ class AppButton extends StatelessWidget {
           Text(
             btnLabel,
             style: labelStyle ??
-                DarkStyles.robotW400F18.copyWith(
+                DarkStyles.interW500F20.copyWith(
                   color: ColorsManager.mainDark,
                 ),
           ),

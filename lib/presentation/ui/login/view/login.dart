@@ -112,6 +112,7 @@ class _LoginState extends State<Login> {
   }
 
   void onCreateAccountPressed() {
+    clearFocus();
     Navigator.pushNamed(context, Routes.register);
   }
 }

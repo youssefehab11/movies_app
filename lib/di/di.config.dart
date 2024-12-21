@@ -33,6 +33,8 @@ import '../data/data_source_contract/firebase_data_source/firestore/history_data
     as _i509;
 import '../data/data_source_contract/firebase_data_source/firestore/wish_list_data_source.dart'
     as _i64;
+import '../data/data_source_contract/shared_preferences/shared_preferense_data_source.dart'
+    as _i1002;
 import '../data/data_source_impl/api_data_source_impl/genres_data_source_impl.dart'
     as _i173;
 import '../data/data_source_impl/api_data_source_impl/movie_details_data_source_impl.dart'
@@ -55,6 +57,8 @@ import '../data/data_source_impl/firebase_data_source_impl/firestore/history_dat
     as _i952;
 import '../data/data_source_impl/firebase_data_source_impl/firestore/wish_list_data_source_impl.dart'
     as _i685;
+import '../data/data_source_impl/shared_preferences/shared_preferences_data_source_impl.dart'
+    as _i1028;
 import '../data/repositry_impl/api_repo_impl/genre_repo_impl.dart' as _i818;
 import '../data/repositry_impl/api_repo_impl/movie_details_repo_impl.dart'
     as _i1005;
@@ -75,9 +79,12 @@ import '../data/repositry_impl/firebase_repo_impl/firestore/history_repo_impl.da
     as _i706;
 import '../data/repositry_impl/firebase_repo_impl/firestore/wish_list_repo_impl.dart'
     as _i464;
+import '../data/repositry_impl/shared_preferences/shared_preferense_repo_impl.dart'
+    as _i705;
 import '../data/services/api/api_manager.dart' as _i1005;
 import '../data/services/firebase/auth_services.dart' as _i862;
 import '../data/services/firebase/firestore_service.dart' as _i213;
+import '../data/services/shared_preferences/shared_preferences.dart' as _i467;
 import '../domain/repositry_contract/api_repo/genres_repo.dart' as _i711;
 import '../domain/repositry_contract/api_repo/movie_details_repo.dart' as _i777;
 import '../domain/repositry_contract/api_repo/movies_repo.dart' as _i160;
@@ -97,6 +104,8 @@ import '../domain/repositry_contract/firebase_repo/firestore/history_repo.dart'
     as _i368;
 import '../domain/repositry_contract/firebase_repo/firestore/wish_list_repo.dart'
     as _i486;
+import '../domain/repositry_contract/shared_preferences/shared_preferences_repo.dart'
+    as _i783;
 import '../domain/use_cases/auth/create_account.dart' as _i624;
 import '../domain/use_cases/auth/edit_profile.dart' as _i202;
 import '../domain/use_cases/auth/get_cached_user.dart' as _i983;
@@ -118,6 +127,10 @@ import '../domain/use_cases/movies/get_wish_list.dart' as _i967;
 import '../domain/use_cases/movies/remove_movie_from_histroy.dart' as _i321;
 import '../domain/use_cases/movies/remove_movie_from_wish_list.dart' as _i406;
 import '../domain/use_cases/movies/search_movies.dart' as _i307;
+import '../domain/use_cases/shared_preferences/get_onboarding_bool.dart'
+    as _i873;
+import '../domain/use_cases/shared_preferences/save_onboarding_bool.dart'
+    as _i479;
 import '../presentation/application/app_view_model.dart' as _i510;
 import '../presentation/ui/edit_profile/view_model/view_model.dart' as _i384;
 import '../presentation/ui/layout/tabs/explore/view_models/explore_movies/explore_movies_view_model.dart'
@@ -156,6 +169,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i1005.ApiManager>(() => _i1005.ApiManager());
     gh.singleton<_i213.FireStoreServies>(() => _i213.FireStoreServies());
+    gh.singleton<_i467.AppSharedPreferences>(
+        () => _i467.AppSharedPreferences());
+    gh.factory<_i1002.SharedPreferenseDataSource>(() =>
+        _i1028.SharedPreferencesDataSourceImpl(
+            sharedPreferences: gh<_i467.AppSharedPreferences>()));
     gh.factory<_i868.FireStoreUserDataSource>(() =>
         _i341.FireStoreUserDataSourceImpl(
             fireStoreServies: gh<_i213.FireStoreServies>()));
@@ -207,6 +225,10 @@ extension GetItInjectableX on _i174.GetIt {
             wishListRepo: gh<_i486.WishListRepo>()));
     gh.factory<_i100.LogoutDataSource>(() =>
         _i717.LogoutDataSourceImpl(authServices: gh<_i862.AuthServices>()));
+    gh.factory<_i783.SharedPreferencesRepo>(() =>
+        _i705.SharedPreferencesRepoImpl(
+            sharedPreferenseDataSource:
+                gh<_i1002.SharedPreferenseDataSource>()));
     gh.factory<_i125.FireStoreUserRepo>(() => _i495.FireStroreUserRepoImpl(
         fireStoreUserDataSource: gh<_i868.FireStoreUserDataSource>()));
     gh.factory<_i515.AddMovieToHistoryUseCase>(() =>
@@ -222,6 +244,12 @@ extension GetItInjectableX on _i174.GetIt {
         _i495.CachedFirebaseUserRepoImpl(
             cachedFirebaseUserDataSource:
                 gh<_i868.CachedFirebaseUserDataSource>()));
+    gh.factory<_i873.GetOnboardingBoolUseCase>(() =>
+        _i873.GetOnboardingBoolUseCase(
+            sharedPreferencesRepo: gh<_i783.SharedPreferencesRepo>()));
+    gh.factory<_i479.SaveOnboardingBoolUseCase>(() =>
+        _i479.SaveOnboardingBoolUseCase(
+            sharedPreferencesRepo: gh<_i783.SharedPreferencesRepo>()));
     gh.factory<_i340.GetExploreMoviesUseCase>(() =>
         _i340.GetExploreMoviesUseCase(moviesRepo: gh<_i160.MoviesRepo>()));
     gh.factory<_i500.GetNewReleaseMoviesUseCase>(() =>
@@ -262,8 +290,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i35.LoginRepo>(() =>
         _i508.LoginRepoImpl(loginDataSource: gh<_i197.LoginDataSource>()));
     gh.factory<_i510.AppViewModel>(() => _i510.AppViewModel(
-        getCachedFirebaseUserUseCase:
-            gh<_i983.GetCachedFirebaseUserUseCase>()));
+          getCachedFirebaseUserUseCase:
+              gh<_i983.GetCachedFirebaseUserUseCase>(),
+          getOnboardingBoolUseCase: gh<_i873.GetOnboardingBoolUseCase>(),
+          saveOnboardingBoolUseCase: gh<_i479.SaveOnboardingBoolUseCase>(),
+        ));
     gh.factory<_i624.CreateAccountUseCase>(
         () => _i624.CreateAccountUseCase(authRepo: gh<_i769.RegisterRepo>()));
     gh.factory<_i353.SignOutUseCase>(

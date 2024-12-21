@@ -95,64 +95,74 @@ class _EditProfileState extends State<EditProfile> {
         child: GestureDetector(
           onTap: () => clearFocus(),
           child: Scaffold(
+            resizeToAvoidBottomInset: false,
             appBar: const DefaultAppBar(title: StringsManager.editProfile),
             body: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    SizedBox(height: 35.h),
-                    CircleAvatar(
-                      radius: 60,
-                      child: Image.asset('assets/images/profile_test.png'),
-                    ),
-                    SizedBox(height: 35.h),
-                    AppTextField(
-                      controller: nameController,
-                      hintText: StringsManager.name,
-                      keyboardType: TextInputType.text,
-                      textInputAction: TextInputAction.done,
-                      prefixSvg: AssetsManager.nameIc,
-                      validator: (input) =>
-                          NameValidator(fieldName: StringsManager.name)
-                              .validate(input),
-                    ),
-                    const SizedBox(height: 16.0),
-                    AppTextField(
-                      controller: phoneController,
-                      hintText: StringsManager.phone,
-                      keyboardType: TextInputType.number,
-                      textInputAction: TextInputAction.done,
-                      prefixSvg: AssetsManager.phoneIc,
-                      validator: (input) =>
-                          PhoneValidator(fieldName: StringsManager.phone)
-                              .validate(input),
-                    ),
-                    const Spacer(),
-                    // SizedBox(
-                    //   width: double.infinity,
-                    //   child: AppButton(
-                    //     btnLabel: StringsManager.deleteAccount,
-                    //     color: ColorsManager.red,
-                    //     labelStyle: DarkStyles.robotW400F18,
-                    //     onBtnPressed: () {},
-                    //   ),
-                    // ),
-                    SizedBox(height: 16.h),
-                    SizedBox(
-                      width: double.infinity,
-                      child: AppButton(
-                        btnLabel: StringsManager.updateData,
-                        onBtnPressed: () => onUpdateDataPressed(),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Form(
+                        key: formKey,
+                        child: Column(
+                          children: [
+                            SizedBox(height: 35.h),
+                            CircleAvatar(
+                              radius: 60,
+                              child:
+                                  Image.asset('assets/images/profile_test.png'),
+                            ),
+                            SizedBox(height: 35.h),
+                            AppTextField(
+                              controller: nameController,
+                              hintText: StringsManager.name,
+                              keyboardType: TextInputType.text,
+                              textInputAction: TextInputAction.done,
+                              prefixSvg: AssetsManager.nameIc,
+                              validator: (input) =>
+                                  NameValidator(fieldName: StringsManager.name)
+                                      .validate(input),
+                            ),
+                            const SizedBox(height: 16.0),
+                            AppTextField(
+                              controller: phoneController,
+                              hintText: StringsManager.phone,
+                              keyboardType: TextInputType.number,
+                              textInputAction: TextInputAction.done,
+                              prefixSvg: AssetsManager.phoneIc,
+                              validator: (input) => PhoneValidator(
+                                      fieldName: StringsManager.phone)
+                                  .validate(input),
+                            ),
+                            //const Spacer(),
+                            // SizedBox(
+                            //   width: double.infinity,
+                            //   child: AppButton(
+                            //     btnLabel: StringsManager.deleteAccount,
+                            //     color: ColorsManager.red,
+                            //     labelStyle: DarkStyles.robotW400F18,
+                            //     onBtnPressed: () {},
+                            //   ),
+                            // ),
+                          ],
+                        ),
                       ),
                     ),
-                    const SafeArea(
-                      top: false,
-                      child: SizedBox.shrink(),
-                    )
-                  ],
-                ),
+                  ),
+                  SizedBox(height: 16.h),
+                  SizedBox(
+                    width: double.infinity,
+                    child: AppButton(
+                      btnLabel: StringsManager.updateData,
+                      onBtnPressed: () => onUpdateDataPressed(),
+                    ),
+                  ),
+                  const SafeArea(
+                    top: false,
+                    child: SizedBox.shrink(),
+                  )
+                ],
               ),
             ),
           ),

@@ -24,4 +24,11 @@ class AssetsManager {
   static const String availableNow = '$_base/available_now.png';
 
   static const String logo = '$_base/logo.png';
+
+  static const String intro = '$_base/intro.png';
+  static const String onboarding1 = '$_base/onboarding_1.png';
+  static const String onboarding2 = '$_base/onboarding_2.png';
+  static const String onboarding3 = '$_base/onboarding_3.png';
+  static const String onboarding4 = '$_base/onboarding_4.png';
+  static const String onboarding5 = '$_base/onboarding_5.png';
 }
