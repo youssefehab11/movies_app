@@ -7,8 +7,9 @@ class AppDialogs {
   static void showMeesageDialog({
     required BuildContext context,
     required String posActionTitle,
-    required VoidCallback posAction,
     required String message,
+    VoidCallback? posAction,
+    VoidCallback? negAction,
     String? title,
     String? negativeActionTitle,
   }) {
@@ -17,12 +18,21 @@ class AppDialogs {
       actions.add(
         AppTextButton(
           label: negativeActionTitle,
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () {
+            Navigator.of(context).pop();
+            negAction?.call();
+          },
         ),
       );
     }
     actions.add(
-      AppTextButton(label: posActionTitle, onPressed: posAction),
+      AppTextButton(
+        label: posActionTitle,
+        onPressed: () {
+          Navigator.of(context).pop();
+          posAction?.call();
+        },
+      ),
     );
 
     showDialog(

@@ -66,7 +66,6 @@ class _LoginState extends State<Login> {
                 posActionTitle: StringsManager.ok,
                 title: StringsManager.success,
                 posAction: () {
-                  Navigator.of(context).pop();
                   Navigator.pushReplacementNamed(context, Routes.home);
                 },
                 message: StringsManager.successfullyLoggedIn,
